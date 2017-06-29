@@ -25,10 +25,13 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Layout>
           <Panel>
-            <AppBar title="Web visualization" />
-            <div className="flex1">
-              <Button label="Open sidebar" raised primary
+            <AppBar title="Web visualization">
+              <Button raised accent
+                label="Details"
+                icon="group_work"
                 onClick={ this.toggleSidebar }/>
+            </AppBar>
+            <div className="flex1">
             </div>
           </Panel>
           <Sidebar pinned={this.state.showSidebar} width={10}>
