@@ -22,6 +22,9 @@ class VisitStore extends EventEmitter {
         console.log(`UNHANDLED ACTION ${action}`);
     }
   }
+  getAll() {
+    return _.concat(this.pages, this.visits, this.pageviews);
+  }
 }
 
 const store = new VisitStore;

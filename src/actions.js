@@ -42,11 +42,12 @@ export function getInitialData() {
     period: 'range',
     date: '2017-01-01,today',
   }).then((data) => {
-    console.log("YAAA");
-    Dispatcher.dispatch({
-      type: 'GET_PAGES',
-      pages: data
-    });
+    setTimeout(function () {
+      Dispatcher.dispatch({
+        type: 'GET_PAGES',
+        pages: data
+      });
+    }, 4000);
   });
 }
 
