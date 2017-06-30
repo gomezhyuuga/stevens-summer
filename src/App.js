@@ -12,15 +12,28 @@ import NavDrawer from 'react-toolbox/lib/drawer/Drawer';
 import Panel from 'react-toolbox/lib/layout/Panel';
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar';
 
+import VisitStore from './stores/VisitStore'
+import * as VisitActions from './actions'
+
 class App extends Component {
   state = {
-    showSidebar: true
+    showSidebar: true,
   }
 
   toggleSidebar = () => {
     this.setState({ showSidebar: !this.state.showSidebar });
   }
+
+  componentWillMount() {
+    VisitStore.on('change', (ev) => {
+      this.setState({ updated: true });
+    });
+    //VisitStore.removeListener();
+    VisitActions.getInitialData();
+  }
+
   render() {
+    console.log('Rendering...');
     return (
       <ThemeProvider theme={theme}>
         <Layout>
