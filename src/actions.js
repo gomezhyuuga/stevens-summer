@@ -48,6 +48,20 @@ export function getInitialData() {
       });
     }, 4000);
   });
+  query({
+    method: 'Live.getLastVisitsDetails',
+    doNotFetchActions: 1,
+    flat: 0,
+    period: 'range',
+    date: '2017-01-01,today',
+  }).then((data) => {
+    setTimeout(function () {
+      Dispatcher.dispatch({
+        type: 'GET_VISITS',
+        visits: data
+      });
+    }, 6000);
+  });
 }
 
 export function getVisits(filters) {

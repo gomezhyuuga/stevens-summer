@@ -32,7 +32,8 @@ class App extends Component {
     VisitStore.on('change', (ev) => {
       this.setState({
         updated: true,
-        pages: VisitStore.getAll()
+        pages: VisitStore.getPages(),
+        visits: VisitStore.getVisits()
       });
     });
     //VisitStore.removeListener();
@@ -51,7 +52,18 @@ class App extends Component {
           },
           classes: 'page'
         }
-      }).value();
+      })
+      .concat(_.map(this.state.visits, (visit) => {
+        return {
+          classes: 'visit',
+          data: {
+            id: visit.idVisit,
+            visitor: visit.visitorId,
+            actions: visit.actions,
+            timestamp: visit.serverTimestamp
+          }
+        }
+      })) .value();
   }
 
   render() {

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import cytoscape from 'cytoscape';
 import cycola from 'cytoscape-cola';
@@ -7,9 +6,6 @@ regCose(cytoscape);
 cycola (cytoscape);
 
 class Graph extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
   componentDidUpdate() {
     if (!this.props.data || !this.container) {
       console.error('nowhere to mount');
@@ -21,12 +17,12 @@ class Graph extends React.PureComponent {
     let style     = this.props.style;
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout});
-    //cy.on('select', 'node', (e) => {
-      //let node = cy.$('node:selected');
-      //this.props.onSelection(node);
-      //let t = document.getElementById('nodeDetails');
-      //t.innerHTML = node.data().id;
-    //});
+    cy.on('select', 'node', (e) => {
+      let node = cy.$('node:selected');
+      this.props.onSelection(node);
+      let t = document.getElementById('nodeDetails');
+      t.innerHTML = node.data().id;
+    });
   }
   componentDidMount() {
   }

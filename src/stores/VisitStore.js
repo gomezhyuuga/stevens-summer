@@ -18,10 +18,16 @@ class VisitStore extends EventEmitter {
         this.pages = action.pages;
         this.emit('change');
         break;
+      case 'GET_VISITS':
+        this.visits = action.visits;
+        this.emit('change');
+        break;
       default:
         console.log(`UNHANDLED ACTION ${action}`);
     }
   }
+  getPages()  { return this.pages }
+  getVisits() { return this.visits }
   getAll() {
     return _.concat(this.pages, this.visits, this.pageviews);
   }
