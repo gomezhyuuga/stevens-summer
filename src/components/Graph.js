@@ -35,7 +35,8 @@ class Graph extends React.PureComponent {
       <div ref={(div) => { this.container = div }}
         style={{
           minWidth: '400px',
-          minHeight: '400px'
+          minHeight: '400px',
+          height: '100%',
         }} />
     );
   }

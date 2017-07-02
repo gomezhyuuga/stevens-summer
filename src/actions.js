@@ -19,7 +19,6 @@ const REQ = axios.create({
   baseURL: API_URL,
   method: 'get',
   params: DEF_PARAMS,
-  headers: {"Access-Control-Allow-Origin": "*"},
 });
 function query(params) {
   return new Promise((resolve, reject) => {

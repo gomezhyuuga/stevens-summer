@@ -59,14 +59,20 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Layout>
-          <Panel>
+          <Panel style={{
+            display: 'flex',
+            flexFlow: 'column',
+            height: '100%',
+          }}>
             <AppBar title="Web visualization">
               <Button raised accent
                 label="Details"
                 icon="group_work"
                 onClick={ this.toggleSidebar }/>
             </AppBar>
-            <div className="flex1">
+            <div className="flex1" style={{
+              flexGrow: 1,
+            }} >
               <Graph container="main-graph" data={this.getMainGraphData()} />
             </div>
           </Panel>
