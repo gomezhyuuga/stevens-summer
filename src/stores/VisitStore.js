@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events'
-import axios from 'axios'
 import _ from 'lodash'
 import Dispatcher from '../dispatcher'
 
@@ -33,7 +32,7 @@ class VisitStore extends EventEmitter {
   }
 }
 
-const store = new VisitStore;
+const store = new VisitStore();
 Dispatcher.register(store.handleAction.bind(store));
 
 export default store;

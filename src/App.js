@@ -10,7 +10,7 @@ import IconButton from 'react-toolbox/lib/button/IconButton'
 import Button from 'react-toolbox/lib/button/Button'
 import AppBar from 'react-toolbox/lib/app_bar/AppBar'
 import Layout from 'react-toolbox/lib/layout/Layout'
-import NavDrawer from 'react-toolbox/lib/drawer/Drawer'
+//import NavDrawer from 'react-toolbox/lib/drawer/Drawer'
 import Panel from 'react-toolbox/lib/layout/Panel'
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar'
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker'
@@ -49,7 +49,7 @@ class App extends Component {
   }
   handleDateChange = (item, value) => {
     let { startDate, endDate } = this.state;
-    if (item == 'start') {
+    if (item === 'start') {
       startDate = moment(value);
       this.setState({ startDate });
     }

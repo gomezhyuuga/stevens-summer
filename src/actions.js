@@ -1,6 +1,5 @@
 import Dispatcher from './dispatcher'
 import axios from 'axios'
-import _ from 'lodash'
 import moment from 'moment'
 
 const ID_SITE    = 3;
