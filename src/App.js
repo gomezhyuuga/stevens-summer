@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import  './assets/react-toolbox/theme.css'
 import './App.css';
 
@@ -12,6 +13,7 @@ import Layout from 'react-toolbox/lib/layout/Layout'
 import NavDrawer from 'react-toolbox/lib/drawer/Drawer'
 import Panel from 'react-toolbox/lib/layout/Panel'
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar'
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker'
 
 import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
@@ -21,7 +23,9 @@ import Graph from './components/Graph'
 class App extends Component {
   state = {
     showSidebar: false,
-    pages: []
+    pages: [],
+    startDate: moment('2017-6-5'),
+    endDate: moment('2017-6-7')
   }
 
   toggleSidebar = () => {
@@ -37,7 +41,23 @@ class App extends Component {
       });
     });
     //VisitStore.removeListener();
-    VisitActions.getInitialData();
+    const { startDate, endDate } = this.state;
+    VisitActions.getInitialData({
+      startDate,
+      endDate
+    });
+  }
+  handleDateChange = (item, value) => {
+    let { startDate, endDate } = this.state;
+    if (item == 'start') {
+      startDate = moment(value);
+      this.setState({ startDate });
+    }
+    else {
+      endDate = moment(value);
+      this.setState({ endDate });
+    }
+    VisitActions.getVisits({ startDate, endDate });
   }
 
   getMainGraphData() {
@@ -63,7 +83,7 @@ class App extends Component {
             timestamp: visit.serverTimestamp
           }
         }
-      })) .value();
+      })).value();
   }
 
   render() {
@@ -82,6 +102,17 @@ class App extends Component {
                 icon="group_work"
                 onClick={ this.toggleSidebar }/>
             </AppBar>
+            <div>
+              Testing
+              <DatePicker label="Desde"
+                value={this.state.startDate.toDate()}
+                onChange={this.handleDateChange.bind(this, 'start')}
+                autoOk />
+              <DatePicker label="Hasta"
+                value={this.state.endDate.toDate()}
+                onChange={this.handleDateChange.bind(this, 'end')}
+                autoOk />
+            </div>
             <div className="flex1" style={{
               flexGrow: 1,
             }} >

@@ -1,6 +1,7 @@
 import Dispatcher from './dispatcher'
 import axios from 'axios'
 import _ from 'lodash'
+import moment from 'moment'
 
 const ID_SITE    = 3;
 const AUTH_TOKEN = 'fc57ccac9c12a6aea0b40ae398572a9c';
@@ -20,6 +21,8 @@ const REQ = axios.create({
   method: 'get',
   params: DEF_PARAMS,
 });
+const PIWIK_FORMAT = 'YYYY-MM-DD';
+
 function query(params) {
   return new Promise((resolve, reject) => {
     REQ.get('/index.php', { params })
@@ -34,7 +37,35 @@ function query(params) {
   });
 }
 
-export function getInitialData() {
+function formatDate(date) {
+  return moment(date).format(PIWIK_FORMAT);
+}
+
+export function getVisits(params = {}) {
+  query({
+    method: 'Live.getLastVisitsDetails',
+    doNotFetchActions: 1,
+    flat: 0,
+    period: 'range',
+    date: getDateRange(params)
+  }).then((visits) => {
+    Dispatcher.dispatch({
+      type: 'GET_VISITS',
+      visits: visits
+    });
+  });
+}
+
+function getDateRange(dates) {
+  const { startDate, endDate } = dates;
+  if (startDate && endDate) {
+    return `${formatDate(startDate)},${formatDate(endDate)}`;
+  }
+}
+
+export function getInitialData(params = {}) {
+  let dateRange = getDateRange(params);
+
   query({
     method: 'Actions.getPageUrls',
     flat: 1,
@@ -53,7 +84,7 @@ export function getInitialData() {
     doNotFetchActions: 1,
     flat: 0,
     period: 'range',
-    date: '2017-01-01,today',
+    date: dateRange
   }).then((data) => {
     setTimeout(function () {
       Dispatcher.dispatch({
@@ -62,11 +93,4 @@ export function getInitialData() {
       });
     }, 6000);
   });
-}
-
-export function getVisits(filters) {
-}
-export function getPages() {
-}
-export function getPageViews(filters) {
 }

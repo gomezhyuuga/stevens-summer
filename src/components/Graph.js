@@ -27,6 +27,7 @@ class Graph extends React.PureComponent {
   componentDidMount() {
   }
   render() {
+    console.log('rendering graph...');
     return(
       <div ref={(div) => { this.container = div }}
         style={{
@@ -41,7 +42,7 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-      name: 'cose',
+      name: 'cola',
   },
   style: [
     {

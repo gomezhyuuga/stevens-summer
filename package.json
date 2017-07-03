@@ -9,6 +9,7 @@
     "cytoscape-cose-bilkent": "^1.6.12",
     "events": "^1.1.1",
     "flux": "^3.1.2",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.8",
