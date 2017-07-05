@@ -60,6 +60,11 @@ class App extends Component {
     VisitActions.getVisits({ startDate, endDate });
   }
 
+  nodeSelected(node) {
+    console.info('[NODE SELECTED]', node);
+    this.setState({ showSidebar: true });
+  }
+
   getMainGraphData() {
     return _(this.state.pages)
       .map((page) => {
@@ -68,7 +73,7 @@ class App extends Component {
             id: page.url,
             label: page.label,
             views: page.nb_hits,
-            visits: page.nb_visits
+            visits: page.nb_visits,
           },
           classes: 'page'
         }
@@ -103,7 +108,6 @@ class App extends Component {
                 onClick={ this.toggleSidebar }/>
             </AppBar>
             <div>
-              Testing
               <DatePicker label="Desde"
                 value={this.state.startDate.toDate()}
                 onChange={this.handleDateChange.bind(this, 'start')}
@@ -116,7 +120,12 @@ class App extends Component {
             <div className="flex1" style={{
               flexGrow: 1,
             }} >
-              <Graph container="main-graph" data={this.getMainGraphData()} />
+            <Graph container="main-graph"
+              layout='grid'
+              pages={VisitStore.pages}
+              visits={VisitStore.visits}
+              onSelection={this.nodeSelected.bind(this)}
+              data={this.getMainGraphData()} />
             </div>
           </Panel>
           <Sidebar pinned={this.state.showSidebar} width={10}>

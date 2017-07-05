@@ -26,7 +26,7 @@ function query(params) {
   return new Promise((resolve, reject) => {
     REQ.get('/index.php', { params })
       .then(({ data }) => {
-        console.log('DONE', data);
+        //console.log('DONE', data);
         resolve(data);
       })
       .catch((error) => {
@@ -76,7 +76,7 @@ export function getInitialData(params = {}) {
         type: 'GET_PAGES',
         pages: data
       });
-    }, 4000);
+    }, 100);
   });
   query({
     method: 'Live.getLastVisitsDetails',
@@ -90,6 +90,6 @@ export function getInitialData(params = {}) {
         type: 'GET_VISITS',
         visits: data
       });
-    }, 6000);
+    }, 300);
   });
 }
