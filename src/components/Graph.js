@@ -74,7 +74,7 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-    name: 'cola',
+    name: 'cose',
   },
   style: [
     {

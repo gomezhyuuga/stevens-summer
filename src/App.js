@@ -24,8 +24,8 @@ class App extends Component {
   state = {
     showSidebar: false,
     pages: [],
-    startDate: moment('2017-6-5'),
-    endDate: moment('2017-6-7')
+    startDate: moment('2017-06-05'),
+    endDate: moment('2017-06-07')
   }
 
   toggleSidebar = () => {
@@ -121,7 +121,7 @@ class App extends Component {
               flexGrow: 1,
             }} >
             <Graph container="main-graph"
-              layout='grid'
+              layout='cola'
               pages={VisitStore.pages}
               visits={VisitStore.visits}
               onSelection={this.nodeSelected.bind(this)}
