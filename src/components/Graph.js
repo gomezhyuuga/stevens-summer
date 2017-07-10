@@ -48,7 +48,7 @@ class Graph extends React.PureComponent {
           data: {
             id: visit.idVisit,
             visitor: visit.visitorId,
-            actions: visit.actions,
+            actions: visit.actionDetails,
             timestamp: visit.serverTimestamp
           }
         }
@@ -102,11 +102,8 @@ class Graph extends React.PureComponent {
     });
     cy.on('select', 'node', (e) => {
       let node = cy.$('node:selected');
-      //node.descendants().addClass('collapsed-child');
-      //console.log('collapsing', node.descendants());
-      //this.props.onSelection(node);
-      //let t = document.getElementById('nodeDetails');
-      //t.innerHTML = node.data().id;
+      this.props.onSelection(node);
+      window.snode = node;
     });
   }
   componentDidMount() {

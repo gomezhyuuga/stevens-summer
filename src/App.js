@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import renderjson from 'renderjson'
 import  './assets/react-toolbox/theme.css'
 import './App.css';
 
@@ -20,13 +21,14 @@ import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
 
 import Graph from './components/Graph'
+import ClickPath from './components/ClickPath'
 
 class App extends Component {
   state = {
     showSidebar: false,
     pages: [],
     startDate: moment('2017-06-05'),
-    endDate: moment('2017-06-06')
+    endDate: moment('2017-06-05')
   }
 
   toggleSidebar = () => {
@@ -62,8 +64,9 @@ class App extends Component {
   }
 
   nodeSelected(node) {
-    console.info('[NODE SELECTED]', node);
-    this.setState({ showSidebar: true });
+    this.setState({ showSidebar: true, selectedNode: node });
+    let el = renderjson(node.data());
+    this.infolog.appendChild(el);
   }
 
   render() {
@@ -122,20 +125,25 @@ class App extends Component {
           <section>
             <Snackbar active
               action='Nice'
-              label={ this.state.selectedNode || '(Select a node)' }
+              label={ '(Select a node)' }
               ref='snackbar'
             />
           </section>
         </Panel>
+        { this.state.showSidebar ? (
         <Sidebar pinned={this.state.showSidebar} width={10}>
           <h1>
             Navigation flow
             <IconButton icon='close' onClick={this.toggleSidebar} />
+            <div ref={(el) => { this.infolog = el } } />
+            <ClickPath
+              visit={ this.state.selectedNode.data() }
+              actions={ _.filter(this.state.selectedNode.data().actions, ({type}) => type === 'action') } />
           </h1>
-          <div className="flex1">
-            Hello
+          <div>
           </div>
         </Sidebar>
+        ) : '' }
       </Layout>
     </ThemeProvider>
     );
