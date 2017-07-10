@@ -43,7 +43,7 @@ function formatDate(date) {
 export function getVisits(params = {}) {
   query({
     method: 'Live.getLastVisitsDetails',
-    doNotFetchActions: 1,
+    doNotFetchActions: 0,
     flat: 0,
     period: 'range',
     date: getDateRange(params)
@@ -80,7 +80,7 @@ export function getInitialData(params = {}) {
   });
   query({
     method: 'Live.getLastVisitsDetails',
-    doNotFetchActions: 1,
+    doNotFetchActions: 0,
     flat: 0,
     period: 'range',
     date: dateRange

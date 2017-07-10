@@ -3,19 +3,35 @@ import Colors from '../colors'
 import cytoscape from 'cytoscape'
 import cycola from 'cytoscape-cola'
 import regCose from 'cytoscape-cose-bilkent'
+import jquery from 'jquery'
+import expandCollapse from 'cytoscape-expand-collapse'
+
 import _ from 'lodash'
 
 regCose(cytoscape);
 cycola (cytoscape);
+expandCollapse( cytoscape, jquery ); // register extension
 
 class Graph extends React.PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
     return !(this.props.pages === nextProps.pages
       && this.props.visits === nextProps.visits);
   }
+  objective(page) {
+    switch (page.label) {
+      case 'index':
+      case 'jsf/careers/career_opportunities.html':
+      case 'jsf/auth/login/login.html':
+      case 'jsf/static_content/contactb64c.html':
+      case 'jsf/user_abc/register/registerForm.html':
+        return true;
+      default:
+        return false;
+    }
+  }
   getMainGraphData() {
-    return _(this.props.pages)
-      .map((page) => {
+    let aa = _(this.props.pages)
+      .flatMap((page ) => {
         return {
           data: {
             id: page.url,
@@ -23,11 +39,11 @@ class Graph extends React.PureComponent {
             views: page.nb_hits,
             visits: page.nb_visits,
           },
-          classes: 'page'
+          classes: this.objective(page) ? 'objective' : 'page'
         }
       })
-      .concat(_.map(this.props.visits, (visit) => {
-        return {
+      .concat(_.flatMap(this.props.visits, (visit) => {
+        let visitNode = {
           classes: 'visit',
           data: {
             id: visit.idVisit,
@@ -36,10 +52,31 @@ class Graph extends React.PureComponent {
             timestamp: visit.serverTimestamp
           }
         }
+        let nodes = _(visit.actionDetails)
+          .filter(action => action.type === 'action' )
+          .flatMap(action => {
+            return [{
+              data: {
+                //parent: visit.idVisit,
+                url: action.url,
+                timestamp: action.timestamp,
+                timeSpent: action.timeSpent,
+              },
+              classes: 'pageview'
+            }, {
+              data: {
+                source: visit.idVisit,
+                target: action.url || ""
+              }
+            }]
+          }).value();
+        nodes.push(visitNode);
+        return nodes;
       })).value();
+    return aa;
   }
   componentDidUpdate() {
-    if (!this.props.data || !this.container) {
+    if (!this.props.pages || !this.container) {
       console.error('nowhere to mount');
       return;
     }
@@ -49,9 +86,25 @@ class Graph extends React.PureComponent {
     let style     = this.props.style;
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout});
+    window.cy = cy;
+    cy.expandCollapse({
+      undoable: false,
+      fisheye: false,
+      animate: false,
+      //layoutBy: {
+        //name: 'cose'
+      //}
+    });
+    var api = cy.expandCollapse('get');
+    cy.on('layoutstop', () => {
+      console.log('collapsing');
+      api.collapseAll();
+    });
     cy.on('select', 'node', (e) => {
       let node = cy.$('node:selected');
-      this.props.onSelection(node);
+      //node.descendants().addClass('collapsed-child');
+      //console.log('collapsing', node.descendants());
+      //this.props.onSelection(node);
       //let t = document.getElementById('nodeDetails');
       //t.innerHTML = node.data().id;
     });
@@ -74,7 +127,9 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-    name: 'cose',
+    name: 'cose-bilkent',
+    //concentric: (ele) => ele.hasClass('objective') ? 10 : 2,
+    //spacingFactor: 1
   },
   style: [
     {
@@ -110,17 +165,26 @@ Graph.defaultProps = {
       }
     },
     {
+      selector: '.collapsed-child',
+      css: {
+        'display': 'none',
+        'opacity': '0'
+      }
+    },
+    {
       selector: '.page',
       css: {
-        'width': 'mapData(visits, 0, 100, 10, 80)',
-        'height': 'mapData(visits, 0, 100, 10, 80)',
-        'background-color': `mapData(visits, 0, 50, ${Colors.BLUE}, #DBD56E)`
+        'width': 'mapData(visits, 0, 100, 30, 100)',
+        'height': 'mapData(visits, 0, 100, 30, 100)',
+        'background-color': Colors.BLUE,
       }
     },
     {
       selector: '.visit',
       css: {
-        'background-color': Colors.ORANGE
+        'background-color': Colors.ORANGE,
+        'width': 50,
+        'height': 50
       }
     },
     {

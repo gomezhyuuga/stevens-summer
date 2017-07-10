@@ -1756,6 +1756,10 @@ cytoscape-cose-bilkent@^1.6.12:
   version "1.6.12"
   resolved "https://registry.yarnpkg.com/cytoscape-cose-bilkent/-/cytoscape-cose-bilkent-1.6.12.tgz#92310ff1427e8da0a1364da21cca02d864b74b8d"
 
+cytoscape-expand-collapse@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/cytoscape-expand-collapse/-/cytoscape-expand-collapse-3.0.7.tgz#486c91c1495b41aa452d9e8616343e449d7e064a"
+
 cytoscape@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.1.2.tgz#873684332e43c144017de5e1143c8e5dab738f8e"

@@ -7,6 +7,7 @@
     "cytoscape": "^3.1.2",
     "cytoscape-cola": "^1.6.0",
     "cytoscape-cose-bilkent": "^1.6.12",
+    "cytoscape-expand-collapse": "^3.0.7",
     "events": "^1.1.1",
     "flux": "^3.1.2",
     "moment": "^2.18.1",

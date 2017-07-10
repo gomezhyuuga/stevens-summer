@@ -32,3 +32,39 @@
   padding: 1.8rem;
   background-color: lavender;
 }
+
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 1rem;
+  min-height: 100px;
+}
+.dt {
+  /*flex-grow: 1;*/
+  z-index: 2000;
+}
+.query {
+  padding: 1.5em 1em;
+  text-align: center;
+  color: #FFF;
+  background-color: #263238;
+  width: 80%;
+  font-family: Menlo;
+}
+.query .operator {
+  color: #FF5370;
+  font-weight: bold;
+  padding: 0 6px;
+}
+.query .attr {
+  color: #B2CCD6;
+}
+.query .value {
+  color: #C3E88D;
+  font-weight: bold;
+}
+
+canvas {
+  z-index: 4 !important;
+}
