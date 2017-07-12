@@ -10,7 +10,7 @@ import _ from 'lodash'
 
 regCose(cytoscape);
 cycola (cytoscape);
-expandCollapse( cytoscape, jquery ); // register extension
+//expandCollapse( cytoscape, jquery ); // register extension
 
 class Graph extends React.PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,7 +35,8 @@ class Graph extends React.PureComponent {
         return {
           data: {
             id: page.url,
-            label: page.label,
+            url: page.url,
+            label: page.label.split("/").pop(),
             views: page.nb_hits,
             visits: page.nb_visits,
           },
@@ -85,23 +86,25 @@ class Graph extends React.PureComponent {
     let elements  = this.getMainGraphData();
     let style     = this.props.style;
     let layout    = this.props.layout;
-    let cy        = cytoscape({container, elements, style, layout});
+    let cy        = cytoscape({container, elements, style, layout,
+      zoom: 0.4,
+    });
     window.cy = cy;
-    cy.expandCollapse({
-      undoable: false,
-      fisheye: false,
-      animate: false,
-      //layoutBy: {
-        //name: 'cose'
-      //}
-    });
-    var api = cy.expandCollapse('get');
-    cy.on('layoutstop', () => {
-      console.log('collapsing');
-      api.collapseAll();
-    });
-    cy.on('select', 'node', (e) => {
-      let node = cy.$('node:selected');
+    //cy.expandCollapse({
+      //undoable: false,
+      //fisheye: false,
+      //animate: false,
+      ////layoutBy: {
+        ////name: 'cose'
+      ////}
+    //});
+    //var api = cy.expandCollapse('get');
+    //cy.on('layoutstop', () => {
+      //console.log('collapsing');
+      //api.collapseAll();
+    //});
+    cy.elements().on('select', (e) => {
+      let node = cy.$(':selected');
       this.props.onSelection(node);
       window.snode = node;
     });
@@ -134,7 +137,7 @@ Graph.defaultProps = {
       css: {
         'background-color': Colors.BLUE,
         'border-width': '3px',
-        'border-color': '#564154',
+        'border-color': Colors.BROWN,
         //'content': 'data(id)',
         'height': 70,
         'width':  70,
@@ -148,32 +151,29 @@ Graph.defaultProps = {
         "opacity": "0.8",
         'label': 'data(label)',
         "line-color": "#FF6542",
-        'width': '10',
+        'width': '5',
         'color': '#000',
-        'font-size': '2em',
-        'font-weight': 'bold',
         'target-arrow-shape': 'triangle',
         'curve-style': 'bezier',
-        //'mid-target-arrow-shape': 'triangle',
         'target-arrow-color': '#FF6542',
-        //'mid-target-arrow-color': '#FF6542',
         'target-arrow-fill':  'filled',
-        //'source-arrow-shape': 'circle',
-      }
-    },
-    {
-      selector: '.collapsed-child',
-      css: {
-        'display': 'none',
-        'opacity': '0'
       }
     },
     {
       selector: '.page',
       css: {
-        'width': 'mapData(visits, 0, 100, 30, 100)',
-        'height': 'mapData(visits, 0, 100, 30, 100)',
+        'width': 'mapData(visits, 0, 100, 60, 100)',
+        'height': 'mapData(visits, 0, 100, 60, 100)',
         'background-color': Colors.BLUE,
+        'color': '#FFF',
+        'label': 'data(label)',
+        "text-outline-color": "#333",
+        "text-opacity": 1,
+        "text-outline-width": 2,
+        'font-family': "Roboto, sans-serif",
+        'font-weight': 'bold',
+        "text-valign": "top",
+        "text-halign": "center",
       }
     },
     {
@@ -188,6 +188,12 @@ Graph.defaultProps = {
       selector: '.objective',
       css: {
         'background-color': Colors.GREEN,
+      }
+    },
+    {
+      selector: ':selected',
+      css: {
+        'border-color': '#FF3636',
       }
     }
   ],

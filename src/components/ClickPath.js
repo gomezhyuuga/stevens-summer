@@ -18,7 +18,7 @@ class ClickPath extends React.PureComponent {
   getGraphData() {
     const actions = this.props.actions;
     const visit   = this.props.visit;
-    if (!actions) return;
+    if (!actions || !visit) return;
     console.log('generated');
 
     let nodes = [];
@@ -42,7 +42,7 @@ class ClickPath extends React.PureComponent {
       const action = actions[i];
       const source = actions[i].url;
       const target = actions[i + 1].url;
-      const label  = i == l - 1 ? 'END' : i + 1;
+      const label  = i == l - 2 ? 'END' : i + 2;
       nodes.push({
         data: { source, target, label }
       });
@@ -51,7 +51,12 @@ class ClickPath extends React.PureComponent {
     return nodes;
   }
   componentDidMount() {
-    console.log('MOUNTING');
+    this.makeGraph();
+  }
+  componentDidUpdate() {
+    this.makeGraph();
+  }
+  makeGraph() {
     if (!this.props.actions || !this.container) {
       console.error('nowhere to mount');
       return;
@@ -61,12 +66,11 @@ class ClickPath extends React.PureComponent {
     let elements  = this.getGraphData();
     let style     = this.props.style;
     let layout    = this.props.layout;
-    console.log('ELEMENTS ', elements);
     let cy        = cytoscape({container, elements, style, layout});
-    cy.on('layoutstop', () => {
-      console.log('collapsing');
+    //cy.on('layoutstop', () => {
+      //console.log('collapsing');
       //api.collapseAll();
-    });
+    //});
     //cy.on('select', 'node', (e) => {
       //let node = cy.$('node:selected');
       //this.props.onSelection(node);
@@ -74,7 +78,7 @@ class ClickPath extends React.PureComponent {
     //});
   }
   render() {
-    console.log('rendering clickpath...');
+    console.log('Rendering clickpath...');
     return(
       <div ref={(div) => { this.container = div }}
         style={{
@@ -88,7 +92,9 @@ class ClickPath extends React.PureComponent {
 ClickPath.defaultProps = {
   data: [],
   layout: {
-    name: 'cose-bilkent',
+    name: 'cola',
+    //animate: false,
+    //randomize: false,
     //concentric: (ele) => ele.hasClass('visit') ? 10 : 2,
     //spacingFactor: 10
   },
@@ -139,6 +145,7 @@ ClickPath.defaultProps = {
         'width': 'mapData(visits, 0, 100, 30, 100)',
         'height': 'mapData(visits, 0, 100, 30, 100)',
         'background-color': Colors.BLUE,
+        'label': 'data(url)',
       }
     },
     {

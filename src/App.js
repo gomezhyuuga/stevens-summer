@@ -65,12 +65,22 @@ class App extends Component {
 
   nodeSelected(node) {
     this.setState({ showSidebar: true, selectedNode: node });
-    let el = renderjson(node.data());
-    this.infolog.appendChild(el);
+    //let el = renderjson(node.data());
+    //this.infolog.appendChild(el);
   }
 
   render() {
     console.log('Rendering...');
+    let label;
+    let selected = this.state.selectedNode;
+    if (selected) {
+      const ndata = selected.data();
+      let prefix;
+      if (selected.hasClass('visit')) prefix = "VISITOR";
+      else prefix = "URL";
+      label = selected.hasClass('visit') ? ndata.visitor : ndata.url;
+      label = `${prefix}: ${label}`;
+    }
     return (
       <ThemeProvider theme={theme}>
         <Layout>
@@ -124,26 +134,25 @@ class App extends Component {
           </div>
           <section>
             <Snackbar active
-              action='Nice'
-              label={ '(Select a node)' }
+              label={ label }
               ref='snackbar'
             />
           </section>
         </Panel>
-        { this.state.showSidebar ? (
         <Sidebar pinned={this.state.showSidebar} width={10}>
           <h1>
             Navigation flow
             <IconButton icon='close' onClick={this.toggleSidebar} />
             <div ref={(el) => { this.infolog = el } } />
+            { selected && selected.hasClass('visit') ? (
             <ClickPath
               visit={ this.state.selectedNode.data() }
               actions={ _.filter(this.state.selectedNode.data().actions, ({type}) => type === 'action') } />
+            ) : '' }
           </h1>
           <div>
           </div>
         </Sidebar>
-        ) : '' }
       </Layout>
     </ThemeProvider>
     );
