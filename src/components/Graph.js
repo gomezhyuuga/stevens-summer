@@ -2,6 +2,7 @@ import React from 'react'
 import Colors from '../colors'
 import cytoscape from 'cytoscape'
 import cycola from 'cytoscape-cola'
+import cydagre from 'cytoscape-dagre'
 import regCose from 'cytoscape-cose-bilkent'
 import jquery from 'jquery'
 import expandCollapse from 'cytoscape-expand-collapse'
@@ -11,70 +12,46 @@ import _ from 'lodash'
 regCose(cytoscape);
 cycola (cytoscape);
 //expandCollapse( cytoscape, jquery ); // register extension
+cydagre(cytoscape);
 
 class Graph extends React.PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
     return !(this.props.pages === nextProps.pages
       && this.props.visits === nextProps.visits);
   }
-  objective(page) {
-    switch (page.label) {
-      case 'index':
-      case 'jsf/careers/career_opportunities.html':
-      case 'jsf/auth/login/login.html':
-      case 'jsf/static_content/contactb64c.html':
-      case 'jsf/user_abc/register/registerForm.html':
-        return true;
-      default:
-        return false;
+  getGraphData() {
+    const { pages, visits } = this.props;
+    let nodes = [];
+    // Generate PAGE nodes
+    for (var i = 0, l = pages.length; i < l; i++) {
+      var p       = pages[i];
+      let data    = Object.assign(p, { id: p.url });
+      let classes = p.objective ? 'objective' : 'page';
+
+      nodes.push({ data, classes });
     }
-  }
-  getMainGraphData() {
-    let aa = _(this.props.pages)
-      .flatMap((page ) => {
-        return {
-          data: {
-            id: page.url,
-            url: page.url,
-            label: page.label.split("/").pop(),
-            views: page.nb_hits,
-            visits: page.nb_visits,
-          },
-          classes: this.objective(page) ? 'objective' : 'page'
-        }
-      })
-      .concat(_.flatMap(this.props.visits, (visit) => {
-        let visitNode = {
-          classes: 'visit',
-          data: {
-            id: visit.idVisit,
-            visitor: visit.visitorId,
-            actions: visit.actionDetails,
-            timestamp: visit.serverTimestamp
-          }
-        }
-        let nodes = _(visit.actionDetails)
-          .filter(action => action.type === 'action' )
-          .flatMap(action => {
-            return [{
-              data: {
-                //parent: visit.idVisit,
-                url: action.url,
-                timestamp: action.timestamp,
-                timeSpent: action.timeSpent,
-              },
-              classes: 'pageview'
-            }, {
-              data: {
-                source: visit.idVisit,
-                target: action.url || ""
-              }
-            }]
-          }).value();
-        nodes.push(visitNode);
-        return nodes;
-      })).value();
-    return aa;
+    // Generate VISIT nodes
+    for (var i = 0, l = visits.length; i < l; i++) {
+      var v = visits[i];
+      let classes = 'visit';
+      let data = Object.assign(v, { id: v.idVisit });
+
+      nodes.push({ data, classes });
+
+      // Generate EDGES
+      const pageview = ({ type }) => type === 'action';
+      _(v.actionDetails)
+        .filter(pageview)
+        .uniqBy('url')
+        .forEach((p) => {
+          const source = v.idVisit;
+          const target = p.url;
+          let data = { source, target };
+
+          nodes.push({ data });
+        });
+    }
+    return nodes;
   }
   componentDidUpdate() {
     if (!this.props.pages || !this.container) {
@@ -83,7 +60,7 @@ class Graph extends React.PureComponent {
     }
     let container = this.container;
     container.innerHTML = '';
-    let elements  = this.getMainGraphData();
+    let elements  = this.getGraphData();
     let style     = this.props.style;
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout,
@@ -105,6 +82,9 @@ class Graph extends React.PureComponent {
     //});
     cy.elements().on('select', (e) => {
       let node = cy.$(':selected');
+      if (!node || node.size() === 0) return;
+      node = node[0];
+      console.log(node.data());
       this.props.onSelection(node);
       window.snode = node;
     });
@@ -127,7 +107,7 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-    name: 'cose-bilkent',
+    name: 'cola',
     //concentric: (ele) => ele.hasClass('objective') ? 10 : 2,
     //spacingFactor: 1
   },
@@ -146,27 +126,23 @@ Graph.defaultProps = {
     {
       selector: 'edge',
       css: {
-        //"curve-style": "haystack",
-        //"haystack-radius": "1.0",
+        "curve-style": "bezier",
         "opacity": "0.8",
-        'label': 'data(label)',
-        "line-color": "#FF6542",
-        'width': '5',
-        'color': '#000',
+        "line-color": Colors.ORANGE,
+        'width': 10,
         'target-arrow-shape': 'triangle',
-        'curve-style': 'bezier',
-        'target-arrow-color': '#FF6542',
+        'target-arrow-color': Colors.ORANGE,
         'target-arrow-fill':  'filled',
       }
     },
     {
       selector: '.page',
       css: {
-        'width': 'mapData(visits, 0, 100, 60, 100)',
-        'height': 'mapData(visits, 0, 100, 60, 100)',
+        'width': 'mapData(visits, 0, 500, 20, 100)',
+        'height': 'mapData(visits, 0, 500, 20, 100)',
         'background-color': Colors.BLUE,
         'color': '#FFF',
-        'label': 'data(label)',
+        //'label': 'data(label)',
         "text-outline-color": "#333",
         "text-opacity": 1,
         "text-outline-width": 2,
@@ -174,6 +150,8 @@ Graph.defaultProps = {
         'font-weight': 'bold',
         "text-valign": "top",
         "text-halign": "center",
+        width:  'mapData(nb_visits, 0, 800, 30, 90)',
+        height: 'mapData(nb_visits, 0, 800, 30, 90)',
       }
     },
     {

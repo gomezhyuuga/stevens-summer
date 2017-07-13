@@ -143,15 +143,12 @@ class App extends Component {
           <h1>
             Navigation flow
             <IconButton icon='close' onClick={this.toggleSidebar} />
-            <div ref={(el) => { this.infolog = el } } />
-            { selected && selected.hasClass('visit') ? (
-            <ClickPath
-              visit={ this.state.selectedNode.data() }
-              actions={ _.filter(this.state.selectedNode.data().actions, ({type}) => type === 'action') } />
-            ) : '' }
           </h1>
-          <div>
-          </div>
+          { selected && selected.hasClass('visit') ? (
+          <ClickPath
+            visit={ selected.data() }
+            actions={ _.filter(selected.data().actionDetails, ({type}) => type === 'action') } />
+          ) : '' }
         </Sidebar>
       </Layout>
     </ThemeProvider>

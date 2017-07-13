@@ -3,12 +3,16 @@ import Colors from '../colors'
 import cytoscape from 'cytoscape'
 import cycola from 'cytoscape-cola'
 import regCose from 'cytoscape-cose-bilkent'
+import cydagre from 'cytoscape-dagre'
 import jquery from 'jquery'
+
+import VisitStore from '../stores/VisitStore'
 
 import _ from 'lodash'
 
 regCose(cytoscape);
 cycola (cytoscape);
+cydagre(cytoscape);
 
 class ClickPath extends React.PureComponent {
   //shouldComponentUpdate(nextProps, nextState) {
@@ -26,15 +30,18 @@ class ClickPath extends React.PureComponent {
       data: visit,
       classes: 'visit'
     });
+    //if (actions.length === 0) return nodes;
+
     nodes.push({
       data: { source: visit.id, target: actions[0].url, label: 'START' }
     });
-    // Append al pages nodes
+    // Append all pages nodes
     nodes = nodes.concat(_.map(actions, (action) => {
       const { timestamp, timeSpent, url } = action;
+      console.log(`${url} ? === ${VisitStore.isObjective(url)}`);
       return {
         data: { id: url, url, timestamp, timeSpent},
-        classes: 'page'
+        classes: VisitStore.isObjective(url) ? 'objective' : 'page'
       }
     }));
     // Create edges
@@ -92,7 +99,7 @@ class ClickPath extends React.PureComponent {
 ClickPath.defaultProps = {
   data: [],
   layout: {
-    name: 'cola',
+    name: 'dagre',
     //animate: false,
     //randomize: false,
     //concentric: (ele) => ele.hasClass('visit') ? 10 : 2,

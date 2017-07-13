@@ -1756,6 +1756,12 @@ cytoscape-cose-bilkent@^1.6.12:
   version "1.6.12"
   resolved "https://registry.yarnpkg.com/cytoscape-cose-bilkent/-/cytoscape-cose-bilkent-1.6.12.tgz#92310ff1427e8da0a1364da21cca02d864b74b8d"
 
+cytoscape-dagre@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cytoscape-dagre/-/cytoscape-dagre-1.6.0.tgz#10abcc30ef348b60132cad64820b66ddc7fcd069"
+  dependencies:
+    dagre "~0.7.4"
+
 cytoscape-expand-collapse@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/cytoscape-expand-collapse/-/cytoscape-expand-collapse-3.0.7.tgz#486c91c1495b41aa452d9e8616343e449d7e064a"
@@ -1823,6 +1829,13 @@ d@1:
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
   dependencies:
     es5-ext "^0.10.9"
+
+dagre@~0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/dagre/-/dagre-0.7.4.tgz#de72f0e74a550ce11ce638f0a136fed712398022"
+  dependencies:
+    graphlib "^1.0.5"
+    lodash "^3.10.0"
 
 damerau-levenshtein@^1.0.0:
   version "1.0.4"
@@ -2896,7 +2909,7 @@ graphlib-dot@^0.6.2:
     graphlib "^1.0.1"
     lodash "^2.4.1"
 
-graphlib@^1.0.1:
+graphlib@^1.0.1, graphlib@^1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/graphlib/-/graphlib-1.0.7.tgz#0cab2df0ffe6abe070b2625bfa1edb6ec967b8b1"
   dependencies:
@@ -6589,7 +6602,7 @@ url-parse@1.0.x:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-url-parse@^1.1.1, url-parse@^1.1.8:
+url-parse@^1.1.1, url-parse@^1.1.8, url-parse@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.1.9.tgz#c67f1d775d51f0a18911dd7b3ffad27bb9e5bd19"
   dependencies:
