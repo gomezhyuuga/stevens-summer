@@ -13,7 +13,10 @@ class DetailsTabs extends React.Component {
   }
   render() {
     return (
-      <section>
+      <section style={{
+        backgroundColor: 'lavender',
+        height: '100%'
+      }}>
         <Tabs inverse fixed
           index={this.state.index}
           onChange={this.tabChanged}>

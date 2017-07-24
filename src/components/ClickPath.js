@@ -89,7 +89,7 @@ class ClickPath extends React.PureComponent {
       <div ref={(div) => { this.container = div }}
         style={{
           minWidth: '400px',
-          minHeight: '600px',
+          minHeight: '700px',
           height: '100%'
         }} />
     );
@@ -168,6 +168,7 @@ ClickPath.defaultProps = {
       selector: '.objective',
       css: {
         'background-color': Colors.GREEN,
+        'label': 'data(url)',
       }
     }
   ],

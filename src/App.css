@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:300');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-body, aside, section, html {
-  background-color: #E6E6FA;
-}
+/*body, aside, section, html {*/
+  /*background-color: #E6E6FA;*/
+/*}*/
 
 .App {
   text-align: center;
