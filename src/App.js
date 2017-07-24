@@ -29,7 +29,7 @@ class App extends Component {
     showSidebar: false,
     pages: [],
     startDate: moment('2017-06-05'),
-    endDate: moment('2017-06-07')
+    endDate: moment('2017-06-06')
   }
 
   toggleSidebar = () => {
@@ -99,11 +99,13 @@ class App extends Component {
             <AppBar title="Web visualization">
               <DatePicker label="Desde"
                 className="dt"
+                inputClassName="inputDT"
                 value={this.state.startDate.toDate()}
                 onChange={this.handleDateChange.bind(this, 'start')}
                 autoOk />
               <DatePicker label="Hasta"
                 className="dt"
+                inputClassName="inputDT"
                 value={this.state.startDate.toDate()}
                 value={this.state.endDate.toDate()}
                 onChange={this.handleDateChange.bind(this, 'end')}

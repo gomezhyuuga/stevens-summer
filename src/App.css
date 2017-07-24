@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:300');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+body, aside, section, html {
+  background-color: #E6E6FA;
+}
+
 .App {
   text-align: center;
 }
@@ -45,6 +49,18 @@
 .dt {
   /*flex-grow: 1;*/
   z-index: 2000;
+}
+.inputDT {
+  margin: 0 1em;
+}
+.inputDT input {
+  color: #FFF;
+  border-bottom: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  text-align: center;
+  border-radius: 2px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
 }
 #query {
   width: 100%;

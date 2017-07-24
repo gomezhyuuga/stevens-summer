@@ -16,7 +16,7 @@ class Query extends React.Component {
         mode="mysql"
         theme="tomorrow_night_eighties"
         width="100%"
-        height="80px"
+        height="60px"
         fontSize={16}
         name="query"
         showGutter={false}
