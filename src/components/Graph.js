@@ -4,6 +4,9 @@ import cytoscape from 'cytoscape'
 import cycola from 'cytoscape-cola'
 import cydagre from 'cytoscape-dagre'
 import regCose from 'cytoscape-cose-bilkent'
+import euler from 'cytoscape-euler'
+import force from 'cytoscape-ngraph.forcelayout'
+import spread from 'cytoscape-spread'
 import jquery from 'jquery'
 import expandCollapse from 'cytoscape-expand-collapse'
 import viewUtilities from 'cytoscape-view-utilities'
@@ -13,6 +16,9 @@ import Concentric from './layouts/Concentric'
 
 import _ from 'lodash'
 
+cytoscape.use(euler);
+force(cytoscape);
+spread(cytoscape);
 regCose(cytoscape);
 cycola (cytoscape);
 //expandCollapse( cytoscape, jquery ); // register extension
@@ -103,8 +109,7 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-    name: 'random',
-    //flow: true,
+    name: 'cola',
   },
   style: [
     {
@@ -114,8 +119,8 @@ Graph.defaultProps = {
         'border-width': '3px',
         'border-color': Colors.BROWN,
         //'content': 'data(id)',
-        'height': 70,
-        'width':  70,
+        //'height': 70,
+        //'width':  70,
       }
     },
     {
@@ -124,7 +129,7 @@ Graph.defaultProps = {
         "curve-style": "bezier",
         "opacity": "0.8",
         "line-color": Colors.ORANGE,
-        'width': 10,
+        //'width': 10,
         'target-arrow-shape': 'triangle',
         'target-arrow-color': Colors.ORANGE,
         'target-arrow-fill':  'filled',
@@ -153,8 +158,8 @@ Graph.defaultProps = {
       selector: '.visit',
       css: {
         'background-color': Colors.ORANGE,
-        'width': 50,
-        'height': 50
+        //'width': 50,
+        //'height': 50
       }
     },
     {
