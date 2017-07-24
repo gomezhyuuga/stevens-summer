@@ -111,7 +111,10 @@ class Graph extends React.PureComponent {
 
 Graph.defaultProps = {
   data: [],
-  layout: { name: 'cola' },
+  layout: {
+    name: 'random',
+    //flow: true,
+  },
   style: [
     {
       selector: 'node',

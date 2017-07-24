@@ -21,8 +21,8 @@ import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
 
 import Graph from './components/Graph'
-import ClickPath from './components/ClickPath'
 import DetailsTabs from './components/DetailsTabs'
+import Query from './components/Query'
 
 class App extends Component {
   state = {
@@ -97,8 +97,6 @@ class App extends Component {
             height: '100%',
           }}>
             <AppBar title="Web visualization">
-            </AppBar>
-            <div className="filters">
               <DatePicker label="Desde"
                 className="dt"
                 value={this.state.startDate.toDate()}
@@ -110,19 +108,9 @@ class App extends Component {
                 value={this.state.endDate.toDate()}
                 onChange={this.handleDateChange.bind(this, 'end')}
                 autoOk />
-              <div className="query">
-                <span className="attr">browser</span>
-                <span className="operator">==</span>
-                <span className="value">"Firefox"</span>
-                <span className="operator">&&</span>
-                <span className="attr">os</span>
-                <span className="operator">==</span>
-                <span className="value">"Windows"</span>
-                <span className="operator">&&</span>
-                <span className="attr">os</span>
-                <span className="operator">==</span>
-                <span className="value">"Windows"</span>
-              </div>
+            </AppBar>
+            <div className="filters">
+              <Query />
             </div>
             <div className="flex1" style={{
               //flexGrow: 1,

@@ -100,6 +100,7 @@ ClickPath.defaultProps = {
   data: [],
   layout: {
     name: 'dagre',
+    //flow: true,
     //animate: false,
     //randomize: false,
     //concentric: (ele) => ele.hasClass('visit') ? 10 : 2,

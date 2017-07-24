@@ -21,7 +21,6 @@ class DetailsTabs extends React.Component {
             <h2>Web browser</h2>
           </Tab>
           <Tab label="Click Path">
-            <h2>Click Path</h2>
             <ClickPath
               visit={this.props.visit}
               actions={this.props.actions} />
