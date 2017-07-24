@@ -69,7 +69,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('Rendering...');
+    console.log('Rendering Main App...');
     let label;
     let selected = this.state.selectedNode;
     if (selected) {

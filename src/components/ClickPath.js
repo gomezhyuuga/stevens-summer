@@ -38,7 +38,6 @@ class ClickPath extends React.PureComponent {
     // Append all pages nodes
     nodes = nodes.concat(_.map(actions, (action) => {
       const { timestamp, timeSpent, url } = action;
-      console.log(`${url} ? === ${VisitStore.isObjective(url)}`);
       return {
         data: { id: url, url, timestamp, timeSpent},
         classes: VisitStore.isObjective(url) ? 'objective' : 'page'
@@ -90,7 +89,8 @@ class ClickPath extends React.PureComponent {
       <div ref={(div) => { this.container = div }}
         style={{
           minWidth: '400px',
-          minHeight: '400px',
+          minHeight: '600px',
+          height: '100%'
         }} />
     );
   }

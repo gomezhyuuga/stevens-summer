@@ -72,24 +72,15 @@ class Graph extends React.PureComponent {
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout });
     let instance = cy.viewUtilities();
-    CY = cy;
-    VIEW_UTILS = instance;
     window.cy = cy;
     window.vu = instance;
-    //cy.expandCollapse({
-      //undoable: false,
-      //fisheye: false,
-      //animate: false,
-      ////layoutBy: {
-        ////name: 'cose'
-      ////}
-    //});
-    //var api = cy.expandCollapse('get');
+    cy.on('tap', (e) => {
+      if (!e.target.group) instance.removeHighlights();
+    });
     cy.elements().on('select', (e) => {
-      instance.unhighlight(cy.elements());
       let node = e.target;
+      instance.removeHighlights();
       if (!node || node.size() === 0) return;
-      //node = node[0];
       instance.highlightNeighbors(node);
       this.props.onSelection(node);
     });
