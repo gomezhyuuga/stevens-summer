@@ -28,7 +28,7 @@ class App extends Component {
     showSidebar: false,
     pages: [],
     startDate: moment('2017-06-05'),
-    endDate: moment('2017-06-05')
+    endDate: moment('2017-06-07')
   }
 
   toggleSidebar = () => {

@@ -6,6 +6,8 @@ import cydagre from 'cytoscape-dagre'
 import regCose from 'cytoscape-cose-bilkent'
 import jquery from 'jquery'
 import expandCollapse from 'cytoscape-expand-collapse'
+import viewUtilities from 'cytoscape-view-utilities'
+
 
 import _ from 'lodash'
 
@@ -13,6 +15,9 @@ regCose(cytoscape);
 cycola (cytoscape);
 //expandCollapse( cytoscape, jquery ); // register extension
 cydagre(cytoscape);
+viewUtilities(cytoscape, jquery);
+let CY;
+let VIEW_UTILS;
 
 class Graph extends React.PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
@@ -63,10 +68,12 @@ class Graph extends React.PureComponent {
     let elements  = this.getGraphData();
     let style     = this.props.style;
     let layout    = this.props.layout;
-    let cy        = cytoscape({container, elements, style, layout,
-      zoom: 0.4,
-    });
+    let cy        = cytoscape({container, elements, style, layout });
+    let instance = cy.viewUtilities();
+    CY = cy;
+    VIEW_UTILS = instance;
     window.cy = cy;
+    window.vu = instance;
     //cy.expandCollapse({
       //undoable: false,
       //fisheye: false,
@@ -76,17 +83,13 @@ class Graph extends React.PureComponent {
       ////}
     //});
     //var api = cy.expandCollapse('get');
-    //cy.on('layoutstop', () => {
-      //console.log('collapsing');
-      //api.collapseAll();
-    //});
     cy.elements().on('select', (e) => {
-      let node = cy.$(':selected');
+      instance.unhighlight(cy.elements());
+      let node = e.target;
       if (!node || node.size() === 0) return;
-      node = node[0];
-      console.log(node.data());
-      this.props.onSelection(node);
-      window.snode = node;
+      //node = node[0];
+      instance.highlightNeighbors(node);
+      //this.props.onSelection(node);
     });
   }
   componentDidMount() {
@@ -107,8 +110,27 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   layout: {
-    name: 'cola',
-    //concentric: (ele) => ele.hasClass('objective') ? 10 : 2,
+    name: 'concentric',
+    ready: () => {
+      if (!CY) return;
+      console.log('ready layout');
+      let index = CY.nodes("[label='index']");
+      console.log('INDEX FOUND', index.data());
+      //VIEW_UTILS.hide(index);
+      index.remove();
+    },
+    concentric: (node) => {
+      let data = node.data();
+      let number = 10;
+      if (node.hasClass('page')) number = 5;
+      else if (node.hasClass('objective')) number = 10;
+      else number = 1;
+
+      return number;
+    },
+    levelWidth: (nodes) => {
+      return 4;
+    }
     //spacingFactor: 1
   },
   style: [

@@ -1766,6 +1766,10 @@ cytoscape-expand-collapse@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/cytoscape-expand-collapse/-/cytoscape-expand-collapse-3.0.7.tgz#486c91c1495b41aa452d9e8616343e449d7e064a"
 
+cytoscape-view-utilities@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/cytoscape-view-utilities/-/cytoscape-view-utilities-2.0.5.tgz#158cb162a652b3ad0b0cf81afc730485f46d2849"
+
 cytoscape@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.1.2.tgz#873684332e43c144017de5e1143c8e5dab738f8e"
@@ -4220,6 +4224,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
 moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
+mousetrap@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.1.tgz#2a085f5c751294c75e7e81f6ec2545b29cbf42d9"
 
 ms@0.7.1:
   version "0.7.1"
