@@ -22,6 +22,7 @@ import * as VisitActions from './actions'
 
 import Graph from './components/Graph'
 import ClickPath from './components/ClickPath'
+import DetailsTabs from './components/DetailsTabs'
 
 class App extends Component {
   state = {
@@ -64,9 +65,7 @@ class App extends Component {
   }
 
   nodeSelected(node) {
-    this.setState({ showSidebar: true, selectedNode: node });
-    //let el = renderjson(node.data());
-    //this.infolog.appendChild(el);
+    this.setState({ selectedNode: node });
   }
 
   render() {
@@ -81,6 +80,14 @@ class App extends Component {
       label = selected.hasClass('visit') ? ndata.visitor : ndata.url;
       label = `${prefix}: ${label}`;
     }
+    let clickPath = '';
+    let actions = [];
+    let visit = '';
+    if (selected && selected.hasClass('visit')) {
+      actions = _.filter(selected.data().actionDetails, ({type}) => type === 'action');
+      visit = selected.data();
+    }
+
     return (
       <ThemeProvider theme={theme}>
         <Layout>
@@ -90,10 +97,6 @@ class App extends Component {
             height: '100%',
           }}>
             <AppBar title="Web visualization">
-              <Button raised accent
-                label="Details"
-                icon="group_work"
-                onClick={ this.toggleSidebar }/>
             </AppBar>
             <div className="filters">
               <DatePicker label="Desde"
@@ -132,23 +135,13 @@ class App extends Component {
               visits={VisitStore.visits}
               onSelection={this.nodeSelected.bind(this)} />
           </div>
-          <section>
-            <Snackbar active
-              label={ label }
-              ref='snackbar'
-            />
-          </section>
         </Panel>
-        <Sidebar pinned={this.state.showSidebar} width={10}>
-          <h1>
-            Navigation flow
-            <IconButton icon='close' onClick={this.toggleSidebar} />
-          </h1>
-          { selected && selected.hasClass('visit') ? (
-          <ClickPath
-            visit={ selected.data() }
-            actions={ _.filter(selected.data().actionDetails, ({type}) => type === 'action') } />
-          ) : '' }
+        <Sidebar pinned width={8}>
+          <DetailsTabs
+            clickPath={clickPath}
+            actions={actions}
+            visit={visit}
+          />
         </Sidebar>
       </Layout>
     </ThemeProvider>

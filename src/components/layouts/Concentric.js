@@ -13,7 +13,7 @@ export default {
     let number = 10;
     if (node.hasClass('page')) number = 5;
     else if (node.hasClass('objective')) number = 10;
-    else number = 1;
+    else number = node.degree();
 
     return number;
   },

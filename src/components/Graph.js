@@ -91,7 +91,7 @@ class Graph extends React.PureComponent {
       if (!node || node.size() === 0) return;
       //node = node[0];
       instance.highlightNeighbors(node);
-      //this.props.onSelection(node);
+      this.props.onSelection(node);
     });
   }
   componentDidMount() {
@@ -111,7 +111,7 @@ class Graph extends React.PureComponent {
 
 Graph.defaultProps = {
   data: [],
-  layout: Concentric,
+  layout: { name: 'cola' },
   style: [
     {
       selector: 'node',
