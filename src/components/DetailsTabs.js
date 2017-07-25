@@ -2,6 +2,7 @@ import React from 'react'
 import Tabs from 'react-toolbox/lib/tabs/Tabs'
 import Tab from 'react-toolbox/lib/tabs/Tab'
 import ClickPath from './ClickPath'
+import JSONTree from 'react-json-tree'
 
 class DetailsTabs extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class DetailsTabs extends React.Component {
     this.setState({ index });
   }
   render() {
+    let selection = this.props.selection;
     return (
       <section style={{
         backgroundColor: 'lavender',
@@ -21,7 +23,7 @@ class DetailsTabs extends React.Component {
           index={this.state.index}
           onChange={this.tabChanged}>
           <Tab label="Details">
-            <h2>Web browser</h2>
+            { selection ? <JSONTree data={selection.data()} /> : "Select Something" }
           </Tab>
           <Tab label="Click Path">
             <ClickPath

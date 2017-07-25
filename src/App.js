@@ -132,6 +132,7 @@ class App extends Component {
         </Panel>
         <Sidebar pinned width={8}>
           <DetailsTabs
+            selection={selected}
             clickPath={clickPath}
             actions={actions}
             visit={visit}
