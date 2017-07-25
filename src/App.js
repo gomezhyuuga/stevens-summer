@@ -67,6 +67,9 @@ class App extends Component {
   nodeSelected(node) {
     this.setState({ selectedNode: node });
   }
+  queryData(query) {
+    this._graph.query(query);
+  }
 
   render() {
     console.log('Rendering Main App...');
@@ -112,7 +115,7 @@ class App extends Component {
                 autoOk />
             </AppBar>
             <div className="filters">
-              <Query />
+              <Query onQuery={this.queryData.bind(this)} />
             </div>
             <div className="flex1" style={{
               //flexGrow: 1,
@@ -121,6 +124,7 @@ class App extends Component {
               height: '80%'
             }} >
             <Graph container="main-graph"
+              ref={ (c) => this._graph = c }
               pages={VisitStore.pages}
               visits={VisitStore.visits}
               onSelection={this.nodeSelected.bind(this)} />

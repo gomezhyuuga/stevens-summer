@@ -32,6 +32,13 @@ class Graph extends React.PureComponent {
     return !(this.props.pages === nextProps.pages
       && this.props.visits === nextProps.visits);
   }
+  query(q) {
+    console.log(`Querying ${q}`);
+    let vu = this.cy.viewUtilities();
+    vu.removeHighlights();
+    let eles = this.cy.nodes(q);
+    vu.highlight(eles);
+  }
   getGraphData() {
     const { pages, visits } = this.props;
     let nodes = [];
@@ -78,6 +85,7 @@ class Graph extends React.PureComponent {
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout });
     let instance = cy.viewUtilities();
+    this.cy = cy;
     window.cy = cy;
     window.vu = instance;
     cy.on('tap', (e) => {
