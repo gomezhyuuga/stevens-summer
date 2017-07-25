@@ -65,9 +65,9 @@ class App extends Component {
   }
 
   nodeSelected(node) {
-    this.setState({ selectedNode: node });
+    if (this.state.selectedNode != node) this.setState({ selectedNode: node });
   }
-  queryData(query) {
+  queryData = (query) => {
     this._graph.query(query);
   }
 
@@ -115,7 +115,7 @@ class App extends Component {
                 autoOk />
             </AppBar>
             <div className="filters">
-              <Query onQuery={this.queryData.bind(this)} />
+              <Query onQuery={this.queryData} />
             </div>
             <div className="flex1" style={{
               //flexGrow: 1,

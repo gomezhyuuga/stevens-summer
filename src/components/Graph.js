@@ -37,7 +37,7 @@ class Graph extends React.PureComponent {
     let vu = this.cy.viewUtilities();
     vu.removeHighlights();
     let eles = this.cy.nodes(q);
-    vu.highlight(eles);
+    vu.highlightNeighbors(eles);
   }
   getGraphData() {
     const { pages, visits } = this.props;
@@ -90,7 +90,10 @@ class Graph extends React.PureComponent {
     window.cy = cy;
     window.vu = instance;
     cy.on('tap', (e) => {
-      if (!e.target.group) instance.removeHighlights();
+      if (!e.target.group) {
+        instance.removeHighlights();
+        this.props.onSelection(undefined);
+      }
     });
     cy.elements().on('select', (e) => {
       let node = e.target;
