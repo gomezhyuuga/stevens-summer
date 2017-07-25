@@ -16,6 +16,7 @@ import Snackbar from 'react-toolbox/lib/snackbar/Snackbar'
 import Panel from 'react-toolbox/lib/layout/Panel'
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar'
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker'
+import Dropdown from 'react-toolbox/lib/dropdown/Dropdown'
 
 import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
@@ -24,16 +25,26 @@ import Graph from './components/Graph'
 import DetailsTabs from './components/DetailsTabs'
 import Query from './components/Query'
 
+const LAYOUTS = [
+  { value: 'cola', label: "Cola" },
+  { value: 'cose', label: "Cose" },
+  { value: 'cose-bilkent', label: "Cose Bilkent" },
+  { value: 'random', label: "Random" },
+  { value: 'spread', label: "Spread" },
+  { value: 'grid', label: "Grid" },
+];
+
 class App extends Component {
   state = {
     showSidebar: false,
     pages: [],
     startDate: moment('2017-06-05'),
-    endDate: moment('2017-06-06')
+    endDate: moment('2017-06-06'),
+    layout: 'cola'
   }
 
-  toggleSidebar = () => {
-    this.setState({ showSidebar: !this.state.showSidebar });
+  changeLayout = (layout) => {
+    this.setState({ layout });
   }
 
   componentWillMount() {
@@ -91,6 +102,8 @@ class App extends Component {
       visit = selected.data();
     }
 
+    const layout = this.state.layout;
+
     return (
       <ThemeProvider theme={theme}>
         <Layout>
@@ -127,10 +140,24 @@ class App extends Component {
               ref={ (c) => this._graph = c }
               pages={VisitStore.pages}
               visits={VisitStore.visits}
+              layout={{
+                name: layout
+              }}
               onSelection={this.nodeSelected.bind(this)} />
           </div>
         </Panel>
         <Sidebar pinned width={8}>
+          <div style={{
+            padding: '1em'
+          }}>
+            <Dropdown
+              auto
+              label="Layout"
+              onChange={this.changeLayout}
+              source={LAYOUTS}
+              value={this.state.layout}
+            />
+          </div>
           <DetailsTabs
             selection={selected}
             clickPath={clickPath}

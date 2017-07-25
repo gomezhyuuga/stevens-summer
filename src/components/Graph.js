@@ -28,9 +28,13 @@ let CY;
 let VIEW_UTILS;
 
 class Graph extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
   shouldComponentUpdate(nextProps, nextState) {
-    return !(this.props.pages === nextProps.pages
-      && this.props.visits === nextProps.visits);
+    let { pages, visits, layout } = this.props;
+    if (layout.name != nextProps.layout.name) return true;
+    return !(pages === nextProps.pages && visits === nextProps.visits);
   }
   query(q) {
     console.log(`Querying ${q}`);
@@ -120,8 +124,9 @@ class Graph extends React.PureComponent {
 
 Graph.defaultProps = {
   data: [],
+  //layout: Concentric,
   layout: {
-    name: 'cola',
+    name: 'spread',
   },
   style: [
     {

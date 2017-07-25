@@ -10,14 +10,11 @@ export default {
   },
   concentric: (node) => {
     let data = node.data();
-    let number = 10;
-    if (node.hasClass('page')) number = 5;
-    else if (node.hasClass('objective')) number = 10;
-    else number = node.degree();
-
-    return number;
+    if (node.hasClass('page')) return 10;
+    else if (node.hasClass('objective')) return 30;
+    else return 1;
   },
   levelWidth: (nodes) => {
-    return 4;
+    return 5;
   }
 }
