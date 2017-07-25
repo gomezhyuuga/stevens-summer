@@ -22,13 +22,15 @@ class DetailsTabs extends React.Component {
         <Tabs inverse fixed
           index={this.state.index}
           onChange={this.tabChanged}>
-          <Tab label="Details">
-            { selection ? <JSONTree data={selection.data()} /> : "Select Something" }
-          </Tab>
           <Tab label="Click Path">
+            { selection ?
             <ClickPath
               visit={this.props.visit}
               actions={this.props.actions} />
+                : "Select something" }
+          </Tab>
+          <Tab label="Details">
+            { selection ? <JSONTree data={selection.data()} /> : "Select something" }
           </Tab>
         </Tabs>
       </section>
