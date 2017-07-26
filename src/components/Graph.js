@@ -13,6 +13,7 @@ import viewUtilities from 'cytoscape-view-utilities'
 
 import Concentric from './layouts/Concentric'
 
+import 'flag-icon-css/css/flag-icon.css'
 
 import _ from 'lodash'
 
@@ -89,7 +90,13 @@ class Graph extends React.PureComponent {
     let style     = this.props.style;
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout });
-    let instance = cy.viewUtilities();
+    let instance = cy.viewUtilities({
+      node: {
+        unhighlighted: {
+          'background-image-opacity': 0.3
+        }
+      }
+    });
     this.cy = cy;
     window.cy = cy;
     window.vu = instance;
@@ -104,6 +111,7 @@ class Graph extends React.PureComponent {
       instance.removeHighlights();
       if (!node || node.size() === 0) return;
       instance.highlightNeighbors(node);
+      //node.components()[0].select();
       this.props.onSelection(node);
     });
   }
@@ -124,6 +132,7 @@ class Graph extends React.PureComponent {
 
 Graph.defaultProps = {
   data: [],
+  selectionType: 'additive',
   //layout: Concentric,
   layout: {
     name: 'spread',
@@ -132,6 +141,13 @@ Graph.defaultProps = {
     {
       selector: 'node',
       css: {
+        'background-image': ( node ) => {
+          if (node.data().countryCode != "") {
+            let code = node.data().countryCode;
+            return `flags/1x1/${code}.svg`.toLowerCase();
+          }
+        },
+        'background-fit': 'cover cover',
         'background-color': Colors.BLUE,
         'border-width': '3px',
         'border-color': Colors.BROWN,
@@ -175,7 +191,7 @@ Graph.defaultProps = {
       selector: '.visit',
       css: {
         'background-color': Colors.ORANGE,
-        'shape': 'rectangle',
+        //'shape': 'rectangle',
         //'width': 50,
         //'height': 50
       }
