@@ -1,8 +1,18 @@
 import React from 'react'
 import Tabs from 'react-toolbox/lib/tabs/Tabs'
+import Dropdown from 'react-toolbox/lib/dropdown/Dropdown'
 import Tab from 'react-toolbox/lib/tabs/Tab'
 import ClickPath from './ClickPath'
 import JSONTree from 'react-json-tree'
+
+const LAYOUTS = [
+  { value: 'cola', label: "Cola" },
+  { value: 'cose', label: "Cose" },
+  { value: 'cose-bilkent', label: "Cose Bilkent" },
+  { value: 'random', label: "Random" },
+  { value: 'spread', label: "Spread" },
+  { value: 'grid', label: "Grid" },
+];
 
 class DetailsTabs extends React.Component {
   constructor(props) {
@@ -12,6 +22,10 @@ class DetailsTabs extends React.Component {
   tabChanged = (index) => {
     this.setState({ index });
   }
+  changeLayout = (layout) => {
+    this.props.onOptionsChange({ layout });
+  }
+
   render() {
     let selection = this.props.selection;
     return (
@@ -22,6 +36,15 @@ class DetailsTabs extends React.Component {
         <Tabs inverse fixed
           index={this.state.index}
           onChange={this.tabChanged}>
+          <Tab label="Options">
+            <Dropdown
+              auto
+              label="Layout"
+              onChange={this.changeLayout}
+              source={LAYOUTS}
+              value={this.props.options.layout}
+            />
+          </Tab>
           <Tab label="Click Path">
             { selection ?
             <ClickPath

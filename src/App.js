@@ -16,7 +16,6 @@ import Snackbar from 'react-toolbox/lib/snackbar/Snackbar'
 import Panel from 'react-toolbox/lib/layout/Panel'
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar'
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker'
-import Dropdown from 'react-toolbox/lib/dropdown/Dropdown'
 
 import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
@@ -25,14 +24,6 @@ import Graph from './components/Graph'
 import DetailsTabs from './components/DetailsTabs'
 import Query from './components/Query'
 
-const LAYOUTS = [
-  { value: 'cola', label: "Cola" },
-  { value: 'cose', label: "Cose" },
-  { value: 'cose-bilkent', label: "Cose Bilkent" },
-  { value: 'random', label: "Random" },
-  { value: 'spread', label: "Spread" },
-  { value: 'grid', label: "Grid" },
-];
 
 class App extends Component {
   state = {
@@ -40,11 +31,13 @@ class App extends Component {
     pages: [],
     startDate: moment('2017-06-05'),
     endDate: moment('2017-06-06'),
-    layout: 'cola'
+    options: {
+      layout: 'cola'
+    }
   }
 
-  changeLayout = (layout) => {
-    this.setState({ layout });
+  optionsChanged = (options) => {
+    this.setState({ options });
   }
 
   componentWillMount() {
@@ -102,7 +95,7 @@ class App extends Component {
       visit = selected.data();
     }
 
-    const layout = this.state.layout;
+    const layout = this.state.options.layout;
 
     return (
       <ThemeProvider theme={theme}>
@@ -147,18 +140,9 @@ class App extends Component {
           </div>
         </Panel>
         <Sidebar pinned width={8}>
-          <div style={{
-            padding: '1em'
-          }}>
-            <Dropdown
-              auto
-              label="Layout"
-              onChange={this.changeLayout}
-              source={LAYOUTS}
-              value={this.state.layout}
-            />
-          </div>
           <DetailsTabs
+            onOptionsChange={this.optionsChanged}
+            options={this.state.options}
             selection={selected}
             clickPath={clickPath}
             actions={actions}

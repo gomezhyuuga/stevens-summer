@@ -72,7 +72,8 @@ class Graph extends React.PureComponent {
           const source = v.idVisit;
           const target = p.url;
           const timeSpent = +p.timeSpent || 0;
-          let data = { source, target, timeSpent };
+          const visitDuration = +v.visitDuration;
+          let data = { source, target, timeSpent, visitDuration };
 
           nodes.push({ data });
         });
@@ -159,10 +160,12 @@ Graph.defaultProps = {
     {
       selector: 'edge',
       css: {
-        //"curve-style": "bezier",
-        //"opacity": "0.8",
+        "curve-style": "bezier",
+        //"curve-style": "haystack",
+        //'haystack-radius': 0,
+        "opacity": "0.8",
         "line-color": Colors.ORANGE,
-        'width': 'mapData(timeSpent, 0, 100, 15, 4)',
+        'width': 'mapData(visitDuration, 10, 180, 15, 2)',
         //'target-arrow-shape': 'triangle',
         //'target-arrow-color': Colors.ORANGE,
         //'target-arrow-fill':  'filled',
