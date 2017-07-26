@@ -32,10 +32,17 @@ class App extends Component {
     startDate: moment('2017-06-05'),
     endDate: moment('2017-06-06'),
     options: {
-      layout: 'cola'
+      layout: 'cola',
+      showFlag: false
     }
   }
 
+  toggleFlag = (val) => {
+    let options = _.assign(this.state.options, { showFlag: val });
+    this.setState({ options });
+    console.log('FLAG: ', val);
+    this._graph.toggleFlag();
+  }
   optionsChanged = (options) => {
     this.setState({ options });
   }
@@ -143,6 +150,8 @@ class App extends Component {
           <DetailsTabs
             onOptionsChange={this.optionsChanged}
             options={this.state.options}
+            showFlag={this.state.options.showFlag}
+            onToggleFlag={this.toggleFlag}
             selection={selected}
             clickPath={clickPath}
             actions={actions}

@@ -1,6 +1,9 @@
 import React from 'react'
 import Tabs from 'react-toolbox/lib/tabs/Tabs'
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown'
+import List from 'react-toolbox/lib/list/List'
+import ListItem from 'react-toolbox/lib/list/ListItem'
+import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox'
 import Tab from 'react-toolbox/lib/tabs/Tab'
 import ClickPath from './ClickPath'
 import JSONTree from 'react-json-tree'
@@ -44,6 +47,13 @@ class DetailsTabs extends React.Component {
               source={LAYOUTS}
               value={this.props.options.layout}
             />
+            <List selectable>
+              <ListCheckbox
+                checked={this.props.showFlag}
+                onChange={this.props.onToggleFlag}
+                caption='Background Flag'
+                legend='Show country flag as background' />
+            </List>
           </Tab>
           <Tab label="Click Path">
             { selection ?

@@ -37,6 +37,10 @@ class Graph extends React.PureComponent {
     if (layout.name != nextProps.layout.name) return true;
     return !(pages === nextProps.pages && visits === nextProps.visits);
   }
+  toggleFlag() {
+    this.cy.nodes('.visit').toggleClass('flag');
+    console.log('toggling class');
+  }
   query(q) {
     console.log(`Querying ${q}`);
     let vu = this.cy.viewUtilities();
@@ -142,6 +146,17 @@ Graph.defaultProps = {
     {
       selector: 'node',
       css: {
+        'background-color': Colors.BLUE,
+        'border-width': '3px',
+        'border-color': Colors.BROWN,
+        //'content': 'data(id)',
+        //'height': 70,
+        //'width':  70,
+      }
+    },
+    {
+      selector: '.flag',
+      css: {
         'background-image': ( node ) => {
           if (node.data().countryCode != "") {
             let code = node.data().countryCode;
@@ -149,12 +164,6 @@ Graph.defaultProps = {
           }
         },
         'background-fit': 'cover cover',
-        'background-color': Colors.BLUE,
-        'border-width': '3px',
-        'border-color': Colors.BROWN,
-        //'content': 'data(id)',
-        //'height': 70,
-        //'width':  70,
       }
     },
     {
