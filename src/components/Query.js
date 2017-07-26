@@ -1,14 +1,14 @@
 import React from 'react'
-import brace from 'brace'
+//import brace from 'brace'
 import AceEditor from 'react-ace'
 
 import 'brace/mode/mysql';
 import 'brace/theme/tomorrow_night_eighties';
 
 class Query extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  //constructor(props) {
+    //super(props);
+  //}
   componentDidMount() {
     const Ace = this._ace;
     const editor = Ace.editor;

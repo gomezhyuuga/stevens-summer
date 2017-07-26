@@ -4,7 +4,7 @@ import cytoscape from 'cytoscape'
 import cycola from 'cytoscape-cola'
 import regCose from 'cytoscape-cose-bilkent'
 import cydagre from 'cytoscape-dagre'
-import jquery from 'jquery'
+//import jquery from 'jquery'
 
 import VisitStore from '../stores/VisitStore'
 
@@ -45,10 +45,9 @@ class ClickPath extends React.PureComponent {
     }));
     // Create edges
     for (var i = 0, l = actions.length; i < l - 1; i++) {
-      const action = actions[i];
       const source = actions[i].url;
       const target = actions[i + 1].url;
-      const label  = i == l - 2 ? 'END' : i + 2;
+      const label  = i === l - 2 ? 'END' : i + 2;
       nodes.push({
         data: { source, target, label }
       });
@@ -73,6 +72,7 @@ class ClickPath extends React.PureComponent {
     let style     = this.props.style;
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout});
+    this._cy = cy;
     //cy.on('layoutstop', () => {
       //console.log('collapsing');
       //api.collapseAll();
@@ -160,7 +160,7 @@ ClickPath.defaultProps = {
       selector: '.visit',
       css: {
         'background-color': Colors.ORANGE,
-        'width': 50,
+        'widty': 50,
         'height': 50
       }
     },

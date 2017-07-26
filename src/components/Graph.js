@@ -8,10 +8,10 @@ import euler from 'cytoscape-euler'
 import force from 'cytoscape-ngraph.forcelayout'
 import spread from 'cytoscape-spread'
 import jquery from 'jquery'
-import expandCollapse from 'cytoscape-expand-collapse'
+//import expandCollapse from 'cytoscape-expand-collapse'
 import viewUtilities from 'cytoscape-view-utilities'
 
-import Concentric from './layouts/Concentric'
+//import Concentric from './layouts/Concentric'
 
 import 'flag-icon-css/css/flag-icon.css'
 
@@ -25,16 +25,11 @@ cycola (cytoscape);
 //expandCollapse( cytoscape, jquery ); // register extension
 cydagre(cytoscape);
 viewUtilities(cytoscape, jquery);
-let CY;
-let VIEW_UTILS;
 
 class Graph extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
   shouldComponentUpdate(nextProps, nextState) {
     let { pages, visits, layout } = this.props;
-    if (layout.name != nextProps.layout.name) return true;
+    if (layout.name !== nextProps.layout.name) return true;
     return !(pages === nextProps.pages && visits === nextProps.visits);
   }
   toggleFlag() {
@@ -52,15 +47,16 @@ class Graph extends React.PureComponent {
     const { pages, visits } = this.props;
     let nodes = [];
     // Generate PAGE nodes
-    for (var i = 0, l = pages.length; i < l; i++) {
+    for (let i = 0, l = pages.length; i < l; i++) {
       var p       = pages[i];
       let data    = Object.assign(p, { id: p.url });
       let classes = p.objective ? 'objective' : 'page';
 
       nodes.push({ data, classes });
     }
+    const pageviewFilter = ({ type }) => type === 'action';
     // Generate VISIT nodes
-    for (var i = 0, l = visits.length; i < l; i++) {
+    for (let i = 0, l = visits.length; i < l; i++) {
       var v = visits[i];
       let classes = 'visit';
       let data = Object.assign(v, { id: v.idVisit });
@@ -68,9 +64,8 @@ class Graph extends React.PureComponent {
       nodes.push({ data, classes });
 
       // Generate EDGES
-      const pageview = ({ type }) => type === 'action';
       _(v.actionDetails)
-        .filter(pageview)
+        .filter(pageviewFilter)
         .uniqBy('url')
         .forEach((p) => {
           const source = v.idVisit;
@@ -158,7 +153,7 @@ Graph.defaultProps = {
       selector: '.flag',
       css: {
         'background-image': ( node ) => {
-          if (node.data().countryCode != "") {
+          if (node.data().countryCode !== "") {
             let code = node.data().countryCode;
             return `flags/1x1/${code}.svg`.toLowerCase();
           }
@@ -195,8 +190,6 @@ Graph.defaultProps = {
         'font-weight': 'bold',
         "text-valign": "top",
         "text-halign": "center",
-        width:  'mapData(nb_visits, 0, 800, 30, 90)',
-        height: 'mapData(nb_visits, 0, 800, 30, 90)',
       }
     },
     {

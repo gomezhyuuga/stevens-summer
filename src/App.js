@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import renderjson from 'renderjson'
 import  './assets/react-toolbox/theme.css'
 import './App.css';
 
 import _ from 'lodash'
 import theme from './assets/react-toolbox/theme'
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider'
-import IconButton from 'react-toolbox/lib/button/IconButton'
-import Button from 'react-toolbox/lib/button/Button'
 import AppBar from 'react-toolbox/lib/app_bar/AppBar'
 import Layout from 'react-toolbox/lib/layout/Layout'
-import Snackbar from 'react-toolbox/lib/snackbar/Snackbar'
-//import NavDrawer from 'react-toolbox/lib/drawer/Drawer'
 import Panel from 'react-toolbox/lib/layout/Panel'
 import Sidebar  from 'react-toolbox/lib/layout/Sidebar'
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker'
@@ -76,7 +71,7 @@ class App extends Component {
   }
 
   nodeSelected(node) {
-    if (this.state.selectedNode != node) this.setState({ selectedNode: node });
+    if (this.state.selectedNode !== node) this.setState({ selectedNode: node });
   }
   queryData = (query) => {
     this._graph.query(query);
@@ -84,19 +79,10 @@ class App extends Component {
 
   render() {
     console.log('Rendering Main App...');
-    let label;
-    let selected = this.state.selectedNode;
-    if (selected) {
-      const ndata = selected.data();
-      let prefix;
-      if (selected.hasClass('visit')) prefix = "VISITOR";
-      else prefix = "URL";
-      label = selected.hasClass('visit') ? ndata.visitor : ndata.url;
-      label = `${prefix}: ${label}`;
-    }
+    let selected  = this.state.selectedNode;
     let clickPath = '';
-    let actions = [];
-    let visit = '';
+    let actions   = [];
+    let visit     = '';
     if (selected && selected.hasClass('visit')) {
       actions = _.filter(selected.data().actionDetails, ({type}) => type === 'action');
       visit = selected.data();
@@ -122,7 +108,6 @@ class App extends Component {
               <DatePicker label="Hasta"
                 className="dt"
                 inputClassName="inputDT"
-                value={this.state.startDate.toDate()}
                 value={this.state.endDate.toDate()}
                 onChange={this.handleDateChange.bind(this, 'end')}
                 autoOk />
