@@ -45,7 +45,7 @@ class App extends Component {
   }
   layoutChanged = (value) => {
     const layout = LAYOUTS[value] || { name: value };
-    this.setState({ layout });
+    this.setState({ options: { layout } });
   }
 
   componentWillMount() {

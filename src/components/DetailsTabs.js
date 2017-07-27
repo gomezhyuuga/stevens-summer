@@ -10,6 +10,7 @@ import JSONTree from 'react-json-tree'
 
 const LAYOUTS = [
   { value: 'cola', label: "Cola" },
+  { value: 'concentric', label: "Concentric" },
   { value: 'cose', label: "Cose" },
   { value: 'cose-bilkent', label: "Cose Bilkent" },
   { value: 'random', label: "Random" },
@@ -26,7 +27,7 @@ class DetailsTabs extends React.Component {
     this.setState({ index });
   }
   changeLayout = (layout) => {
-    this.props.onOptionsChange({ layout });
+    this.props.onOptionsChange(layout);
   }
 
   render() {
