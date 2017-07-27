@@ -64,9 +64,10 @@ class Graph extends React.PureComponent {
       nodes.push({ data, classes });
     }
     const pageviewFilter = ({ type }) => type === 'action';
+    let sampled = _.sampleSize(visits, 50);
     // Generate VISIT nodes
-    for (let i = 0, l = visits.length; i < l; i++) {
-      var v = visits[i];
+    for (let i = 0, l = sampled.length; i < l; i++) {
+      var v = sampled[i];
       let classes = 'visit';
       let data = Object.assign(v, { id: v.idVisit });
 
@@ -212,7 +213,7 @@ Graph.defaultProps = {
     {
       selector: '.index',
       css: {
-        'background-color': Colors.BROWN
+        //'background-color': Colors.BROWN
       }
     },
     {
