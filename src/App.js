@@ -33,7 +33,7 @@ class App extends Component {
     startDate: moment('2017-06-05'),
     endDate: moment('2017-06-06'),
     options: {
-      layout: Grid,
+      layout: Concentric,
       showFlag: false
     }
   }
