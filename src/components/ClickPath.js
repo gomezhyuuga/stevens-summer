@@ -160,8 +160,8 @@ ClickPath.defaultProps = {
       selector: '.visit',
       css: {
         'background-color': Colors.ORANGE,
-        'widty': 50,
-        'height': 50
+        'width': 50,
+        'height': 50,
       }
     },
     {

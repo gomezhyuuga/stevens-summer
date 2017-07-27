@@ -16,9 +16,15 @@ import VisitStore from './stores/VisitStore'
 import * as VisitActions from './actions'
 
 import Graph from './components/Graph'
+import Concentric from './components/layouts/Concentric'
+import Grid from './components/layouts/Grid'
 import DetailsTabs from './components/DetailsTabs'
 import Query from './components/Query'
 
+const LAYOUTS = {
+  concentric: Concentric,
+  grid: Grid
+}
 
 class App extends Component {
   state = {
@@ -27,7 +33,7 @@ class App extends Component {
     startDate: moment('2017-06-05'),
     endDate: moment('2017-06-06'),
     options: {
-      layout: 'cola',
+      layout: Grid,
       showFlag: false
     }
   }
@@ -35,11 +41,11 @@ class App extends Component {
   toggleFlag = (val) => {
     let options = _.assign(this.state.options, { showFlag: val });
     this.setState({ options });
-    console.log('FLAG: ', val);
     this._graph.toggleFlag();
   }
-  optionsChanged = (options) => {
-    this.setState({ options });
+  layoutChanged = (value) => {
+    const layout = LAYOUTS[value] || { name: value };
+    this.setState({ layout });
   }
 
   componentWillMount() {
@@ -125,15 +131,13 @@ class App extends Component {
               ref={ (c) => this._graph = c }
               pages={VisitStore.pages}
               visits={VisitStore.visits}
-              layout={{
-                name: layout
-              }}
+              layout={ this.state.options.layout }
               onSelection={this.nodeSelected.bind(this)} />
           </div>
         </Panel>
         <Sidebar pinned width={8}>
           <DetailsTabs
-            onOptionsChange={this.optionsChanged}
+            onOptionsChange={this.layoutChanged}
             options={this.state.options}
             showFlag={this.state.options.showFlag}
             onToggleFlag={this.toggleFlag}

@@ -45,7 +45,7 @@ class DetailsTabs extends React.Component {
               label="Layout"
               onChange={this.changeLayout}
               source={LAYOUTS}
-              value={this.props.options.layout}
+              value={this.props.options.layout.name}
             />
             <List selectable>
               <ListCheckbox

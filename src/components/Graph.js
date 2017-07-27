@@ -11,11 +11,19 @@ import jquery from 'jquery'
 //import expandCollapse from 'cytoscape-expand-collapse'
 import viewUtilities from 'cytoscape-view-utilities'
 
-//import Concentric from './layouts/Concentric'
+import Concentric from './layouts/Concentric'
 
 import 'flag-icon-css/css/flag-icon.css'
 
 import _ from 'lodash'
+
+const UNHIGHLIGHT_OPACITY = 0.1;
+const UNHIGHLIGHT_STYLE = {
+  unhighlighted: {
+    'opacity': UNHIGHLIGHT_OPACITY,
+    'background-image-opacity': UNHIGHLIGHT_OPACITY,
+  }
+}
 
 cytoscape.use(euler);
 force(cytoscape);
@@ -51,6 +59,7 @@ class Graph extends React.PureComponent {
       var p       = pages[i];
       let data    = Object.assign(p, { id: p.url });
       let classes = p.objective ? 'objective' : 'page';
+      if (p.label === 'index') classes = `index ${classes}`;
 
       nodes.push({ data, classes });
     }
@@ -91,11 +100,8 @@ class Graph extends React.PureComponent {
     let layout    = this.props.layout;
     let cy        = cytoscape({container, elements, style, layout });
     let instance = cy.viewUtilities({
-      node: {
-        unhighlighted: {
-          'background-image-opacity': 0.3
-        }
-      }
+      node: UNHIGHLIGHT_STYLE,
+      edge: UNHIGHLIGHT_STYLE
     });
     this.cy = cy;
     window.cy = cy;
@@ -133,10 +139,6 @@ class Graph extends React.PureComponent {
 Graph.defaultProps = {
   data: [],
   selectionType: 'additive',
-  //layout: Concentric,
-  layout: {
-    name: 'spread',
-  },
   style: [
     {
       selector: 'node',
@@ -205,6 +207,12 @@ Graph.defaultProps = {
       selector: '.objective',
       css: {
         'background-color': Colors.GREEN,
+      }
+    },
+    {
+      selector: '.index',
+      css: {
+        'background-color': Colors.BROWN
       }
     },
     {
