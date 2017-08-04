@@ -1,0 +1,25 @@
+version: "3"
+services:
+  web:
+    image: piwik:3-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - "./config/config.ini.php:/var/www/html/config/config.ini.php"
+    links:
+      - db
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: piwik
+      MYSQL_DATABASE: piwikdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./db:/var/lib/mysql"
+      #- "./db:/var/lib/mysql"
+      #- "./db_dumps/gomezhyuuga_13072017_132435utc.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz"
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
