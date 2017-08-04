@@ -137,6 +137,7 @@ class App extends Component {
         </Panel>
         <Sidebar pinned width={8}>
           <DetailsTabs
+            data={VisitStore.visits || []}
             onOptionsChange={this.layoutChanged}
             options={this.state.options}
             showFlag={this.state.options.showFlag}

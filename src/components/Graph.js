@@ -70,6 +70,8 @@ class Graph extends React.PureComponent {
       var v = sampled[i];
       let classes = 'visit';
       let data = Object.assign(v, { id: v.idVisit });
+      data['visitCount'] = +data['visitCount'];
+      data['visitDuration'] = +data['visitDuration'];
 
       nodes.push({ data, classes });
 
