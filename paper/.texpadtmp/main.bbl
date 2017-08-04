@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{comScoreIVT}
+\href{http://www.comscore.com/Products/Advertising-Analytics/Invalid-Traffic}{{Invalid
+  Traffic}} (2016).
+\newline\urlprefix\url{http://www.comscore.com/Products/Advertising-Analytics/Invalid-Traffic}
+
+\bibitem{BrianPugh2012}
+{Brian Pugh},
+  \href{http://www.comscore.com/esl/Insights/Blog/Battling-Bots-comScores-Ongoing-Efforts-to-Detect-and-Remove-Non-Human-Traffic}{{Battling
+  Bots: comScore's Ongoing Efforts to Detect and Remove Non-Human Traffic}}
+  (nov 2012).
+\newline\urlprefix\url{http://www.comscore.com/esl/Insights/Blog/Battling-Bots-comScores-Ongoing-Efforts-to-Detect-and-Remove-Non-Human-Traffic}
+
+\bibitem{Waa2007}
+Waa, {Web Analytics Definitions [Report]}, Web Anal. Assoc.~(4.0) (2007) 1--32.
+
+\end{thebibliography}
