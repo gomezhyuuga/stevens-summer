@@ -10,7 +10,7 @@ tables_prefix = "piwik_"
 [General]
 salt = "090762c38061401b1ab31ad459ae2071"
 trusted_hosts[] = "localhost:8000"
-cors_domains[] = *
+cors_domains[] = "*"
 
 [Plugins]
 Plugins[] = "CorePluginsAdmin"
@@ -139,11 +139,11 @@ PluginsInstalled[] = "Marketplace"
 PluginsInstalled[] = "ProfessionalServices"
 PluginsInstalled[] = "UserId"
 PluginsInstalled[] = "CustomPiwikJs"
-PluginsInstalled[] = "CustomDimensions"
 PluginsInstalled[] = "IP2Location"
 PluginsInstalled[] = "Bandwidth"
 PluginsInstalled[] = "TreemapVisualization"
 PluginsInstalled[] = "GeoIP2"
 PluginsInstalled[] = "BotTracker"
 PluginsInstalled[] = "VisitorGenerator"
+PluginsInstalled[] = "CustomDimensions"
 

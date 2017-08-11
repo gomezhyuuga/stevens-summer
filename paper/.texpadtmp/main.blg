@@ -3,47 +3,49 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: /Users/gomezhyuuga/Development/stevens/paper/.texpadtmp/main.aux
 The style file: elsarticle-num.bst
 Database file #1: ../references.bib
-Warning--I didn't find a database entry for ""
 Warning--there's a number but no volume in Waa2007
-You've used 3 entries,
+Warning--empty publisher in Dong2012
+Warning--can't use both volume and number fields in Diestel2005
+Warning--can't use both volume and number fields in Dwyer2008
+You've used 16 entries,
             2937 wiz_defined-function locations,
-            688 strings with 5639 characters,
-and the built_in function-call counts, 677 in all, are:
-= -- 61
-> -- 9
-< -- 0
-+ -- 5
-- -- 2
-* -- 38
-:= -- 103
-add.period$ -- 3
-call.type$ -- 3
-change.case$ -- 3
+            804 strings with 8226 characters,
+and the built_in function-call counts, 5051 in all, are:
+= -- 493
+> -- 142
+< -- 4
++ -- 58
+- -- 42
+* -- 420
+:= -- 667
+add.period$ -- 25
+call.type$ -- 16
+change.case$ -- 12
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 23
-empty$ -- 89
-format.name$ -- 2
-if$ -- 178
+cite$ -- 20
+duplicate$ -- 148
+empty$ -- 582
+format.name$ -- 52
+if$ -- 1303
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 1
-newline$ -- 19
-num.names$ -- 2
-pop$ -- 26
+int.to.str$ -- 16
+missing$ -- 18
+newline$ -- 72
+num.names$ -- 15
+pop$ -- 109
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 42
+skip$ -- 310
 stack$ -- 0
-substring$ -- 16
-swap$ -- 5
-text.length$ -- 0
+substring$ -- 244
+swap$ -- 60
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 4
-width$ -- 4
-write$ -- 30
-(There were 2 warnings)
+warning$ -- 4
+while$ -- 36
+width$ -- 18
+write$ -- 160
+(There were 4 warnings)

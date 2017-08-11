@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Previous work}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Enterprise solutions}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Open Source tools}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Common concepts}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Motivation}{}% 6
+\BOOKMARK [1][-]{section.4}{Methodology}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Data collection}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Results}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Main interface}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.2}{Data representation}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.3}{Click Path}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.4}{Segmentation}{section.5}% 13
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Query format}{subsection.5.4}% 14
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Logical operators}{subsection.5.4}% 15
+\BOOKMARK [3][-]{subsubsection.5.4.3}{Examples and use cases}{subsection.5.4}% 16
+\BOOKMARK [2][-]{subsection.5.5}{Insight through layouts}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Conclusions}{}% 18

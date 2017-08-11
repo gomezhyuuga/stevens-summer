@@ -41,6 +41,12 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{listings}
+\usepackage{hyperref}
+
+%% Border in figures
+%%\floatstyle{boxed} 
+%%\restylefloat{figure}
+
 
 % Possible journals:
 % - Journal of Marketing Research Q1
@@ -98,29 +104,30 @@ Big companies like Google are aware of such need of tools in the market and beca
 \label{sec:background}
 There are many tools available for measuring digital content and because this is such an important topic in the \textit{marketing} industry, some companies have created their own tracking tools and build a business around it. We will analyze such tools dividing them into two categories: \textit{enterprise solutions} and \textit{open source} tools. Many of the enterprise solutions (with the exception of Google products) are paid services whereas the open source tools are free to use.
 
-% TODO: link to each service website
 
 \subsection{Enterprise solutions}
+
 \textbf{Google Services}.
-As the biggest company in the Internet, Google has three main products focused on web advertising (Google AdWords and DoubleClick) and web analytics (Google Analytics). Combining such products you can have powerful insights of the users that are visiting your website. DoubleClick is a paid service, but AdWords and Analytics are free to use.
+As the biggest company in the Internet, Google has three main products focused on web advertising (Google AdWords \footnote{\url{ https://adwords.google.com/home/ }} and DoubleClick \footnote{\url{ https://www.doubleclickbygoogle.com/ }}) and web analytics (Google Analytics). Combining such products you can have powerful insights of the users that are visiting your website. DoubleClick is a paid service, but AdWords and Analytics are free to use.
 
 Google Analytics is the main product for getting reports and analyze the traffic to a website. It can be configured to import and track ad campaigns from AdWords and DoubleClick, and allows you to segment the traffic from many sources and with many filters as you want. Also it has the advantage for being widely known by marketing experts and people in many areas so it has become a standard in a certain way.
 
-\textbf{comScore}.
+\textbf{comScore}\footnote{\url{ http://www.comscore.com/ }}.
 It is an American company founded in Virginia which now has big presence not only in the Internet but also providing services to other kind of media companies like the TV industry, newspapers, health care and others as well. Nevertheless, we can not get a further analysis of their tools because they are paid services and usually oriented to big companies with large amount of data. Despite of this fact, comScore has been very open with their current research and publishing some reports in a periodic way \cite{comScoreIVT, BrianPugh2012}.
 
-\textbf{KissMetrics}.
+\textbf{KissMetrics}\footnote{\url { https://www.kissmetrics.com/ }}.
 Also a paid service but this company focuses in more tailored need experience, focusing on consulting and teaching their customers how to implement the tool and interpret the results. Popular stories about the use of KissMetrics are the one of LucidChart (https://www.kissmetrics.com/lucidchart/), a tool for creating digital diagrams, which after upgrading their product, needed to measure the performance of the new design and by using KissMetrics, they could determine an increase of 30\% more conversions. Another case is the one of the e-commerce site Manillo, an Amazon-like service in Denmark, which increased their ROI by 50\% by understanding better their audience (https://www.kissmetrics.com/manillo/).
 
 
 The previous tools can only be tested as a hosted service. This is a disadvantage for some companies that need to complain with law regulations about the storing the customer's data or for companies that need an on-premise solution. Another big concern about this kind of services is that usually you do not own the data, instead you only have access to it through a third-party.
 
 \subsection{Open Source tools}                                                                                               
-\textbf{Piwik}.
+\textbf{Piwik}\footnote{\url{ https://piwik.org/ }}.
 One of the most popular and robust tools that could be self-hosted or as a service in the cloud. Piwik is a company that focuses on giving their users a complete control of everything, meaning that you get full reports (no data sampling), you are the owner of the 100\% of your data and also it is completely open source, which means that you can customize it as you wish. It is developed in PHP and also provides an HTTP API for consulting the reports.
 
-\textbf{Open Web Analytics (OWA).}
+\textbf{Open Web Analytics (OWA)}\footnote{\url{ http://www.openwebanalytics.com/ }}.
 Although this project has not published any new version since 2014, it is still popular in legacy websites. It was integrated in former versions of Content Management Systems like Wordpress or Media Wiki. It can be tested only by installing it on a personal server. One of the greatest features included out of the box is the \textit{click heatmap} that shows the \textit{hottest} sections of your pages.
+
 
 \subsection{Common concepts}
 The following terms are commonly used for referring to the performance of a website or an advertising campaign. It must be mentioned that each service provide their own implementation for computing the values and it is very common for the tools to disagree with the results.
@@ -137,8 +144,7 @@ A complete description of other terms used in media analytics can be found in a 
 
 As an example of how the platforms present the previous metrics, Figure \ref{fig:screenshots} shows examples of some of their reports.
 
-% TODO: check positioning
-\begin{figure}[h]
+\begin{figure}[hp]
 	\centering
 	\begin{tabular}{cc}
 		\subcaptionbox{
@@ -166,24 +172,38 @@ As an example of how the platforms present the previous metrics, Figure \ref{fig
 	}
 \end{figure}
 
-% TODO: previous monitoring tools. Focus in low level data such as network packages and streams
-
 \section{Motivation}
 \label{sec:motivation}
-Getting insights from the data is a very important skill for any business analyst, marketer or any decision maker. However, it is almost impossible to get knowledge from \textit{raw data}, so it must be presented in a way that is easy to understand and analyze. Luckily, nowadays there are many options to visualize data; as we mentioned in Section~\ref{sec:background} some of those platforms provide tools for doing such tasks, and by the use of geographic maps, pivot tables, heatmaps and other visualization techniques, spotting valuable information becomes easier. Nevertheless, the trend of creating new ways to display web analytics has not been changing much in the past few years, objective reports, conversions and site performance usually are still displayed as tables or big score counters. Figures XYZ shows an example of those reports.
+Getting insights from the data is a very important skill for any business analyst, marketer or any decision maker. However, it is almost impossible to get knowledge from \textit{raw data}, so it must be presented in a way that is easy to understand and analyze. Luckily, nowadays there are many options to visualize data; as we mentioned in Section~\ref{sec:background} some of those platforms provide tools for doing such tasks, and by the use of geographic maps, pivot tables, heatmaps and other visualization techniques, spotting valuable information becomes easier. Nevertheless, the trend of creating new ways to display web analytics has not been changing much in the past few years, objective reports, conversions and site performance usually are still displayed as tables or big score counters. Figure \ref{fig:goals_info} shows an example of those reports.
 
-This research propose new ways to display website traffic by using an interactive tool that provides several ways to arrange visits, conversions, user behavior, click stream, pages and filtering options which combined with, for example, Machine Learning pattern recognition, could spot clusters for new market niches or common visitor segments.
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+		\subcaptionbox{
+		Google Analytics: goal information \vspace{2 mm}
+		\label{fig:ga_goals}}{\includegraphics[width = 0.5\textwidth]{screenshots/analytics_goals_stats}} &
+		\subcaptionbox{
+		Piwik: goal information \vspace{2 mm}
+		\label{fig:ga_funnel}}{\includegraphics[width = 0.5\textwidth]{screenshots/piwik_goal_info}} \\
+	\end{tabular}
+	\caption{
+		Reports of goals by Google Analytics and Piwik
+		\label{fig:goals_info}
+	}
+\end{figure}
+
+This research propose new ways to display website traffic by using an interactive tool that provides several ways to arrange visits, conversions, user behavior, click stream, pages and filtering options which combined with, for example, Machine Learning Pattern Recognition \cite{Dong2012}, could spot clusters for new market niches or common visitor segments.
 
 % HINT: previous info could be used for intro/abstract
 
 \section{Methodology}
 \label{sec:methodology}
-The main objective of this research was to use other ways to display visitors and their information in a more graphically way, rather than using tables and counters. To this end, we experimented some techniques such as \textit{treemaps}, \textit{heatmaps} and \textit{network graphs}. Due to the nature of the Internet being a network of connected computers, we decided to base us in network graphs. Following this decision, we needed a support library to compute and display network graphs in many layouts and one of the most popular available is Cytoscape, which was developed by the University of Toronto \cite{}. There are another alternatives like D3.js \cite{} or even Sigma.js \cite{} but Cytoscape has a more friendly programming interface and also it includes a powerful feature to make \textit{queries}. Cytoscape provides a bunch of graph theory algorithms such as \textit{Dijkstra shortest path} \cite{}, \textit{aStar search \cite{}, MST algorithms \cite{}, BFS/DFS traversing and even PageRank \cite{} and centrality algorithms \cite{}.}
+The main objective of this research was to use other ways to display visitors and their information in a more graphically way, rather than using tables and counters. To this end, we experimented some techniques such as \textit{treemaps}, \textit{heatmaps} and \textit{network graphs}. Due to the nature of the Internet being a network of connected computers, we decided to base us in network graphs. Following this decision, we needed a support library to compute and display network graphs in many layouts and one of the most popular available is Cytoscape, which was developed by the University of Toronto \cite{Cytoscape}. There are another alternatives like D3.js \cite{D3js} or even Sigma.js \footnote{\url{http://sigmajs.org/}} but Cytoscape has a more friendly programming interface and also it includes a powerful feature to make \textit{queries}. Cytoscape provides a bunch of graph theory algorithms such as \textit{Dijkstra shortest path} \cite{K.Rohila2014}, \textit{aStar search \cite{Russell1995}}, MST algorithms \cite{Cormen2012}, BFS/DFS traversing and even PageRank \cite{Berkhin2005} and centrality algorithms \cite{Brandes2001}.
 
-Taking advantage of this library we build a web application written in ECMAScript 6 and as a front-end framework, we chose Facebook's React \cite{}.
+Taking advantage of this library we build a web application written in ECMAScript 6 and as a front-end framework, we chose Facebook's React \footnote{\url{ https://facebook.github.io/react/ }}.
 
 \subsection{Data collection}
-In order to collect the information from visitors, we mounted a website and used one of the tools previously mentioned in Section~\ref{sec:background}: Piwik. This was because it allowed us to gather a lot more of raw information and so we could manipulate it to our needs, things that we could not make if we would use for example Google Analytics. Also there was the problem of getting traffic; we generated \textit{fake traffic} by using HTTP botnets \cite{} but there were also some days of human traffic to the website.
+In order to collect the information from visitors, we mounted a website and used one of the tools previously mentioned in Section~\ref{sec:background}: Piwik. This was because it allowed us to gather a lot more of raw information and so we could manipulate it to our needs, things that we could not make if we would use for example Google Analytics. Also there was the problem of getting traffic; we generated \textit{fake traffic} by using HTTP botnets \cite{Acarali2016} but there were also some days of human traffic to the website.
 
 
 \section{Results}
@@ -191,45 +211,94 @@ In order to collect the information from visitors, we mounted a website and used
 The motivation of this research was not to build something that magically at first sight you could spot the information you are searching for. Instead, we think that each business, each scenario, each website provides information in a unique way and because of that each \textit{analysis process} is different. Following this philosophy, the analyst just needs the tools and he/she will make use the most of it to find what is important. The work proposed in this research is intended for that; the tool is there, now use it and find useful information.
 In order to accomplish this task, of course, the tool must provide useful features, and the one proposed in this work has some interesting ones. Lets take a loot to some of them.
 
-% TODO: Figure
+\begin{figure}[h]
+	\centering
+	\includegraphics[width = \textwidth]{screenshots/app_main}
+	\caption{
+		Main interface: (1) Visits Graph (described in section \ref{sec:data_rep}); (2) Query Console; (3) Period Filter; (4) Details Panel
+	}
+	\label{fig:vizits}
+\end{figure}
 
 \subsection{Main interface}
-The user interface is split in two main areas: the network graph on the left side, and the details pane on the right side.
+
+Figure \ref{fig:vizits} shows the user interface provided by the tool. It is divided in two main areas: the network graph on the left side, and the details pane on the right side. This is a brief description of such sections:
+
+\begin{itemize}
+	\item Section (1) contains the \textit{Visits Graph} where the visits to the web pages are displayed as a network graph.
+	\item Section (2) is the \textit{Query Console}, where the user can ask for a specific pattern to be highlighted (further details in section \ref{sec:segmentation}).
+	\item Section (3) provides a way to filter the date by an specific \textit{date range}.
+	\item Section (4) provides a series of options to modify the graph, such as select a different layout (more details in section \ref{sec:layouts}), plot two variables, show the \textit{Click Path} of a visit (section \ref{sec:clickpath}) or change the background of the nodes.
+\end{itemize}
+
+
 All the information is displayed given the date range selected in the top bar; there is also the possibility to change that time period.
 
 \subsection{Data representation}
+\label{sec:data_rep}
 \textbf{Visits}. Each visit is represented an \textit{orange} circle.
 
 \textbf{Pages}. Represented as \textit{blue} circles.
 
 \textbf{Objectives}. For pages marked as \textit{goals or objectives} there is a different color to highlight them, so the \textit{green} circles are used.
 
-Figure XYZ shows the circle's style and how they are connected between them. Each \textit{visit node} is connected to one or more \textit{page/objective nodes} an thus, the connection represents a single visit.
-% TODO: display figure
+Figure \ref{fig:vizits} shows the circle's style and how nodes are connected between them. Each \textit{visit node} is connected to one or more \textit{page/objective nodes} an thus, the connection represents a single visit.
 
 The tool aims to provide easy ways to represent and style the nodes. For example you would be able to chose the size of the circle depending on a metric. For example, making bigger page nodes depending on the number of page views it receives.
 The same principle could be applied to visits by the use of metrics like \textit{visit duration, visit count, number of actions made, etc.} And for the case of objective pages a good indicator would be the \textit{bounce rate}.
 
 
 \subsection{Click Path}
-This feature provides a detailed view of how a specific user is browsing inside the website. It is displayed again as a graph but using a DAG (Directed Acyclic Graph) \cite{} layout. Such graph starts with an orange node (the visit) and it should end in a page node.
+\label{sec:clickpath}
+This feature provides a detailed view of how a specific user is browsing inside the website. It is displayed again as a graph but using a DAG (Directed Acyclic Graph) \cite{Diestel2005} layout. Such graph starts with an orange node (the visit) and it should end in a page node.
 Intuitively in that path there should be at least one or more green circles, representing that the user reached a goal and so making a conversion for the business.
 
-This is a powerful view of how users are navigating in the website, contrasted with tables or lists which are used by some tools (Figure XYZ), by using a graph we can spot more easily the complexity of the visit.
-This could be useful for example to detect behavior. As it was mentioned in Section~\ref{sec:methodology}, there was traffic generated by bots and humans in this research and the \textit{ClickPath} feature can spot clearly the differences between the navigation complexity. As you can see in Figure XYZ, human traffic shows a more complex navigation than bots.
+This is a powerful view of how users are navigating in the website, contrasted with tables or lists which are used by some tools (Figure \ref{fig:clickpath_others}), by using a graph we can spot more easily the complexity of the visit.
+This could be useful for example to detect behavior. As it was mentioned in Section~\ref{sec:methodology}, there was traffic generated by bots and humans in this research and the \textit{ClickPath} feature can spot clearly the differences between the navigation complexity. The improvement of this view for click path are clearly shown in Figure \ref{fig:clickpath_humans_vs_bots}. This view allows us to even see how clearly human traffic browsing has a more complex navigation than bots.
 
-% TODO: figure: comparison of table report vs graphically
-% TODO: figure: clickpath bots vs humans
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+		\subcaptionbox{
+		Google Analytics: user's browsing history \vspace{2 mm}
+		}{\includegraphics[width = 0.5\textwidth]{screenshots/ga_clickpath}} &
+		\subcaptionbox{
+		Piwik: user's browsing history \vspace{2 mm}
+		}{\includegraphics[width = 0.5\textwidth]{screenshots/piwik_clickpath}} \\
+	\end{tabular}
+	\caption{
+		Clickpath views of Google Analytics and Piwik
+		\label{fig:clickpath_others}
+	}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{cc}
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_human} &
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_bots} \\
+		
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_human_2} &
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_bots_2} \\
+		
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_human_3} &
+		\includegraphics[width = 0.45\columnwidth]{screenshots/clickpath_bots_3} \\
+	\end{tabular}
+	\caption{
+		Clickpath view. Left side: human traffic; Right side: bot traffic.
+		\label{fig:clickpath_humans_vs_bots}
+	}
+\end{figure}
 
 \subsection{Segmentation}
+\label{sec:segmentation}
 One of the first tasks when you start analyzing an audience is to create segments, which is no more than performing a filter process given a series of conditions;
-e.g. young people (\texttt{a < age < b}), men living in New York City (\texttt{gender = 'male' \&\& location = 'NYC'}), people coming from social networks (\texttt{referrer IN ['Facebook', 'Twitter', 'Snapchat']}), etc. So it is very important to have an easy way to perform such filters and because of that, there is a \textit{querying} console incorporated in the tool. This work is presenting only the user interface to access the already built-in Cytoscape's querying system.
-% TODO: point part of the screen where it is
-The following are examples of queries you can make using the tool, supporting the base logic operators: \textit{AND, OR, NOT, relational operators ($=, >, <, \leq, \geq$), string matching} and others. The full capabilities are provided by Cytoscape and the full specification can be found in the documentation \cite{}. The aim of this section is to provide examples of how to use such query system to our advantage to create segments.
-% http://js.cytoscape.org/#selectors/data
+e.g. young people (\texttt{a < age < b}), men living in New York City (\texttt{gender = 'male' \&\& location = 'NYC'}), people coming from social networks (\texttt{referrer IN ['Facebook', 'Twitter', 'Snapchat']}), etc. So it is very important to have an easy way to perform such filters and because of that, there is a \textit{Query Console} incorporated in the tool (section (2) of Figure \ref{fig:vizits}). This work is presenting only the user interface to access the already built-in Cytoscape's querying system.
+
+The following are examples of queries you can make using the tool, supporting the base logic operators: \textit{AND, OR, NOT, relational operators ($=, >, <, \leq, \geq$), string matching} and others. The full capabilities are provided by Cytoscape and the full specification can be found in the documentation \footnote{\url{ http://js.cytoscape.org/\#selectors/data }}. The aim of this section is to provide examples of how to use such query system to our advantage to create segments.
 
 \subsubsection{Query format}
-Depending on how your data is structured and the available attributes, you would be able to perform queries matching such attributes. We are using data coming from Piwik so we are able to query visits and pages based on their database structure \cite{}.
+Depending on how your data is structured and the available attributes, you would be able to perform queries matching such attributes. We are using data coming from Piwik so we are able to query visits and pages based on their database structure\footnote{\url{ https://developer.piwik.org/guides/persistence-and-the-mysql-backend }}.
 The format follows the next grammar:
 \[
 group[ attr \; OP \; value ]
@@ -275,15 +344,23 @@ Visitors using Google Chrome \textit{and} with a visit duration greater than 10 
 .visit[browserCode = 'CH'][visitDuration > 10][continentCode = 'ams']
 \end{lstlisting}
 
-An interesting use case for the previous querying system enables us to use it with \textbf{Machine Learning} algorithms, specifically with decision trees based techniques that create patterns splitting the data by attribute values. The figure XYZ shows a J48 decision tree \cite{} trained with traffic data, spotting clusters of visitors that match certain properties.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = \textwidth]{screenshots/decision_tree}
+	\caption{J48 Decision Tree computed by Weka}
+	\label{fig:j48_decisionTree}
+\end{figure}
+
+An interesting use case for the previous querying system enables us to use it with \textbf{Machine Learning} algorithms, specifically with decision trees based techniques that create patterns splitting the data by attribute values. The figure \ref{fig:j48_decisionTree} shows a J48 decision tree \cite{drazin2012decision} trained with traffic data, spotting clusters of visitors that match certain properties.
 
 \subsection{Insight through layouts}
+\label{sec:layouts}
 
 Positioning the nodes in a clever way could result into instant insights from your site and how it is performing. By default Cytoscape provides several layouts to arrange the node, some of them would position the nodes depending on the graph's attributes like the node's \textit{degree}, connected components or betweenness centrality. Default layouts included in the library are: \textit{grid, random, preset, circle, concentric, breadth first, cose.}
-It also has extensions to use third-party layouts like Cose and Cose-Bilkent \cite{} (often used in micro-biology), Cola \cite{} or force layouts \cite{} which simulate gravity attraction. It is the decision of the analyzer to use the layout that seems to fit better to the situation, choosing the right one could improve the way to discover new patterns.
+It also has extensions to use third-party layouts like Cose and Cose-Bilkent \cite{Dogrusoz2009} (often used in micro-biology), Cola \cite{Dwyer2008} or force layouts which simulate force attraction. It is the decision of the analyzer to use the layout that seems to fit better to the situation, choosing the right one could improve the way to discover new patterns.
 
 However, we propose the use of the \textit{concentric layout} to give an indicator of one of the most used metrics in web analytics: \textit{bounce rate}. The motivation is to \textit{keep in the closest radius your objective pages}, meaning a good performance the more of they are in the first concentric circle. This enables the analyst to start asking the right questions.
-The following cases are possible situations of \textit{performance indicators} like \textit{bounce rate}, we believe that using the \textit{concentric layout} would be a good way to spot such performance and also to discover new opportunities in the website pages. The metric used for the reports is \textit{bounce rate}.
+The following cases are possible situations of \textit{performance indicators} like \textit{bounce rate}, we believe that using the \textit{concentric layout} would be a good way to spot such performance and also to discover new opportunities in the website pages. The metric used for the reports is \textit{bounce rate}. Figure \ref{fig:concentric_objective_performance} shows an example of each case.
 
 \textbf{Case 1: green nodes in the first level.}
 
@@ -298,7 +375,24 @@ Another way to spot how your objectives are performing. The intuition here is th
 Although at first sight you can think that it is not a good indicator to have \textit{blue circles} inside your first level, \textit{you can take advantage of it.}
 Because this is telling you that you have pages that can lead to \textit{potential conversions}, therefore, you should try to use them to engage your users. Possible use cases for those pages are inserting in them call-to-action elements, displaying ads, making offers or treat them as landing pages. Again, you can use this knowledge to engage the users and lead them to a conversion.
 
-% TODO: Figure with the three cases
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\subcaptionbox{
+		Case 1: green nodes in the first level (healthy). \vspace{2 mm}
+		}{\includegraphics[width = 0.3\textwidth]{screenshots/concentric_case_1}} &
+		\subcaptionbox{
+		Case 2: green nodes spread in many levels (unhealthy). \vspace{2 mm}
+		}{\includegraphics[width = 0.3\textwidth]{screenshots/concentric_case_2}} &
+		\subcaptionbox{
+		Case 3: blue and green nodes mixed in the closest levels (spotting potential conversions). \vspace{2 mm}
+		}{\includegraphics[width = 0.3\textwidth]{screenshots/concentric_case_3}} \\
+	\end{tabular}
+	\caption{
+		Objective performance visualization through a concentric layout.
+		\label{fig:concentric_objective_performance}
+	}
+\end{figure}
 
 
 \section{Conclusions}

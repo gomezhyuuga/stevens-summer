@@ -17,8 +17,7 @@ services:
       - "3306:3306"
     volumes:
       - "./db:/var/lib/mysql"
-      #- "./db:/var/lib/mysql"
-      #- "./db_dumps/gomezhyuuga_13072017_132435utc.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz"
+      - "./gomezhyuuga_25072017_090850utc.sql:/docker-entrypoint-initdb.d/dump.sql"
   adminer:
     image: adminer
     ports:
